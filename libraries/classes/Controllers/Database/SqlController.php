@@ -33,7 +33,6 @@ class SqlController extends AbstractController
     public function index(): void
     {
         global $goto, $back, $db, $cfg, $err_url;
-
         $this->addScriptFiles([
             'makegrid.js',
             'vendor/jquery/jquery.uitablefilter.js',

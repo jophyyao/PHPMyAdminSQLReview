@@ -34,7 +34,7 @@ class __TwigTemplate_0863f4ffb57e94441a3ffc96709f7947e910daa2937f6a4fd04151b52d0
     {
         $macros = $this->macros;
         // line 1
-        echo "<div id=\"pma_console_container\">
+        echo "<div id=\"pma_console_container\" style=\"display: none;\">
     <div id=\"pma_console\">
         ";
         // line 4

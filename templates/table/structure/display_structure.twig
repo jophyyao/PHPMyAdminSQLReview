@@ -356,9 +356,10 @@
         <a href="#" id="move_columns_anchor">
             {{ get_icon('b_move', 'Move columns'|trans, true) }}
         </a>
-        <a href="{{ url('/normalization', {'db': db, 'table': table}) }}">
-            {{ get_icon('normalize', 'Normalize'|trans, true) }}
-        </a>
+        <!--  规范化  -->
+{#        <a href="{{ url('/normalization', {'db': db, 'table': table}) }}">#}
+{#            {{ get_icon('normalize', 'Normalize'|trans, true) }}#}
+{#        </a>#}
     {% endif %}
     {% if tbl_is_view and not db_is_system_schema %}
         {% if is_active %}

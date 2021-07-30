@@ -791,6 +791,7 @@ Functions.confirmQuery = function (theForm1, sqlQuery1) {
         doConfirmRegExp3.test(sqlQuery1) ||
         doConfirmRegExp4.test(sqlQuery1)) {
         var message;
+
         if (sqlQuery1.length > 100) {
             message = sqlQuery1.substr(0, 100) + '\n    ...';
         } else {
@@ -2802,6 +2803,7 @@ Functions.sqlPrettyPrint = function (string) {
  * @param function    callbackFn    callback to execute after user clicks on OK
  * @param function    openCallback  optional callback to run when dialog is shown
  */
+// jophy
 Functions.confirm = function (question, url, callbackFn, openCallback) {
     var confirmState = CommonParams.get('confirm');
     if (! confirmState) {

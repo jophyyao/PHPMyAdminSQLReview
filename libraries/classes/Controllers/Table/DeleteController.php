@@ -11,6 +11,7 @@ use PhpMyAdmin\Relation;
 use PhpMyAdmin\RelationCleanup;
 use PhpMyAdmin\Response;
 use PhpMyAdmin\Sql;
+use PhpMyAdmin\SqlHistory;
 use PhpMyAdmin\Template;
 use PhpMyAdmin\Transformations;
 use PhpMyAdmin\Url;
@@ -37,7 +38,7 @@ class DeleteController extends AbstractController
 
     public function rows(): void
     {
-        global $db, $goto, $sql_query, $table, $disp_message, $disp_query, $PMA_Theme, $active_page;
+        global $db, $goto, $sql_query, $table, $disp_message, $disp_query, $PMA_Theme, $active_page, $cfg;
 
         $mult_btn = $_POST['mult_btn'] ?? '';
         $original_sql_query = $_POST['original_sql_query'] ?? '';
@@ -66,6 +67,9 @@ class DeleteController extends AbstractController
                 $sql_query .= $query . "\n";
                 $this->dbi->selectDb($db);
                 $this->dbi->query($query);
+                // jophy
+                $sh = new SqlHistory($this->dbi);
+                $sh->common_save($_POST, $cfg['Server'], $query, "multiple delete");
             }
 
             if (! empty($_REQUEST['pos'])) {

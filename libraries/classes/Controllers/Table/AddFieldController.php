@@ -17,6 +17,7 @@ use PhpMyAdmin\Template;
 use PhpMyAdmin\Transformations;
 use PhpMyAdmin\Url;
 use PhpMyAdmin\Util;
+use PhpMyAdmin\SqlHistory;
 use function intval;
 use function is_array;
 use function min;
@@ -64,7 +65,7 @@ class AddFieldController extends AbstractController
 
     public function index(): void
     {
-        global $err_url, $message, $action, $active_page, $sql_query;
+        global $err_url, $message, $action, $active_page, $sql_query, $cfg;
         global $num_fields, $regenerate, $result, $db, $table;
 
         $this->addScriptFiles(['table/structure.js']);
@@ -149,6 +150,7 @@ class AddFieldController extends AbstractController
                 }
             }
 
+
             // Go back to the structure sub-page
             $message = Message::success(
                 __('Table %1$s has been altered successfully.')
@@ -158,6 +160,10 @@ class AddFieldController extends AbstractController
                 'message',
                 Generator::getMessage($message, $sql_query, 'success')
             );
+
+            // jophy
+            $sh = new SqlHistory($this->dbi);
+            $sh->common_save($_POST, $cfg['Server'], $sql_query, "structure add field");
 
             return;
         }

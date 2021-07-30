@@ -25,6 +25,7 @@ use PhpMyAdmin\Relation;
 use PhpMyAdmin\RelationCleanup;
 use PhpMyAdmin\Response;
 use PhpMyAdmin\Sql;
+use PhpMyAdmin\SqlHistory;
 use PhpMyAdmin\SqlParser\Context;
 use PhpMyAdmin\SqlParser\Parser;
 use PhpMyAdmin\SqlParser\Statements\CreateStatement;
@@ -108,7 +109,7 @@ class StructureController extends AbstractController
 
     public function index(): void
     {
-        global $reread_info, $showtable, $db, $table, $cfg, $err_url;
+        global $reread_info, $showtable, $db, $table, $cfg, $err_url, $cfg;
         global $tbl_is_view, $tbl_storage_engine, $tbl_collation, $table_info_num_rows;
 
         $this->dbi->selectDb($this->db);
@@ -184,7 +185,6 @@ class StructureController extends AbstractController
             // continue to show the table's structure
             unset($_POST['selected']);
         }
-
         $this->index();
     }
 
@@ -402,6 +402,9 @@ class StructureController extends AbstractController
 
         if (empty($message)) {
             $message = Message::success();
+            // jophy
+            $sh = new SqlHistory($this->dbi);
+            $sh->common_save($_POST, $GLOBALS['cfg']['Server'], $sql_query, "structure multiple unique");
         }
 
         $this->index();
@@ -508,6 +511,9 @@ class StructureController extends AbstractController
 
         if (empty($message)) {
             $message = Message::success();
+            // jophy
+            $sh = new SqlHistory($this->dbi);
+            $sh->common_save($_POST, $GLOBALS['cfg']['Server'], $sql_query, "structure multiple primary");
         }
 
         $this->index();
@@ -549,6 +555,9 @@ class StructureController extends AbstractController
 
         if (empty($message)) {
             $message = Message::success();
+            // jophy
+            $sh = new SqlHistory($this->dbi);
+            $sh->common_save($_POST, $GLOBALS['cfg']['Server'], $sql_query, "structure multiple delete");
         }
 
         $this->index();
@@ -708,6 +717,9 @@ class StructureController extends AbstractController
                 $message = Message::success(
                     __('The columns have been moved successfully.')
                 );
+                // jophy
+                $sh = new SqlHistory($this->dbi);
+                $sh->common_save($_POST, $GLOBALS['cfg']['Server'], $sql_query, "structure move columns");
                 $this->response->addJSON('message', $message);
                 $this->response->addJSON('columns', $column_names);
             }
@@ -783,6 +795,7 @@ class StructureController extends AbstractController
             $this->dbi->selectDb($this->db);
             $this->updatePartitioning();
             $this->index();
+
 
             return;
         }
@@ -994,6 +1007,9 @@ class StructureController extends AbstractController
         $message = Message::success(
             __('Table %1$s has been altered successfully.')
         );
+        // jophy
+        $sh = new SqlHistory($this->dbi);
+        $sh->common_save($_POST, $GLOBALS['cfg']['Server'], $sql_query, "structure partitioning");
         $message->addParam($this->table);
         $this->response->addHTML(
             Generator::getMessage($message, $sql_query, 'success')
@@ -1201,6 +1217,10 @@ class StructureController extends AbstractController
                     $changedToBlob[$i] = false;
                 }
             }
+
+            // jophy
+            $sh = new SqlHistory($this->dbi);
+            $sh->common_save($_POST, $GLOBALS['cfg']['Server'], $sql_query, "structure update");
 
             // Then make the requested changes
             $result = $this->dbi->tryQuery($sql_query);

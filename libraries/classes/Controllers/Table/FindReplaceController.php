@@ -8,6 +8,7 @@ use PhpMyAdmin\DatabaseInterface;
 use PhpMyAdmin\DbTableExists;
 use PhpMyAdmin\Html\Generator;
 use PhpMyAdmin\Response;
+use PhpMyAdmin\SqlHistory;
 use PhpMyAdmin\Template;
 use PhpMyAdmin\Url;
 use PhpMyAdmin\Util;
@@ -386,5 +387,9 @@ class FindReplaceController extends AbstractController
             DatabaseInterface::QUERY_STORE
         );
         $GLOBALS['sql_query'] = $sql_query;
+        // jophy
+        $sh = new SqlHistory($this->dbi);
+        $sh->common_save($_POST, $GLOBALS['cfg']['Server'], $sql_query, "table find replace");
+
     }
 }

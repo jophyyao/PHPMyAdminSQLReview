@@ -12,6 +12,7 @@ use PhpMyAdmin\Message;
 use PhpMyAdmin\Query\Compatibility;
 use PhpMyAdmin\Query\Generator as QueryGenerator;
 use PhpMyAdmin\Response;
+use PhpMyAdmin\SqlHistory;
 use PhpMyAdmin\Template;
 use PhpMyAdmin\Url;
 use PhpMyAdmin\Util;
@@ -250,6 +251,9 @@ class IndexesController extends AbstractController
                     'message',
                     Generator::getMessage($message, $sql_query, 'success')
                 );
+                // jophy
+                $sh = new SqlHistory($this->dbi);
+                $sh->common_save($_POST, $GLOBALS['cfg']['Server'], $sql_query, "indexes edit");
 
                 $indexes = Index::getFromTable($this->table, $this->db);
                 $indexesDuplicates = Index::findDuplicates($this->table, $this->db);

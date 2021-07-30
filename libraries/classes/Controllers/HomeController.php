@@ -223,7 +223,6 @@ class HomeController extends AbstractController
         $this->checkRequirements();
 
         $git = new Git($this->config);
-
         $this->render('home/index', [
             'message' => $displayMessage ?? '',
             'partial_logout' => $partialLogout ?? '',

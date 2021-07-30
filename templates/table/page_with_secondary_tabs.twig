@@ -6,11 +6,12 @@
       </a>
     </li>
 
-    <li class="nav-item">
-      <a href="{{ url('/table/relation', {'db': db, 'table': table}) }}" id="table_relation_id" class="nav-link{{ route == '/table/relation' ? ' active' }}">
-        {{ get_icon('b_relations', 'Relation view'|trans, true) }}
-      </a>
-    </li>
+    <!-- 关联试图 -->
+{#    <li class="nav-item">#}
+{#      <a href="{{ url('/table/relation', {'db': db, 'table': table}) }}" id="table_relation_id" class="nav-link{{ route == '/table/relation' ? ' active' }}">#}
+{#        {{ get_icon('b_relations', 'Relation view'|trans, true) }}#}
+{#      </a>#}
+{#    </li>#}
   </ul>
 {% endif %}
 

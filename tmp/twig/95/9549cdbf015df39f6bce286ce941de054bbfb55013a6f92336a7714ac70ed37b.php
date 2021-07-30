@@ -52,34 +52,24 @@ class __TwigTemplate_0e917ad89b2ed8f67e49f0b855814a5f591a4ea9232a96a9d96add74913
       </a>
     </li>
 
-    <li class=\"nav-item\">
-      <a href=\"";
-            // line 10
-            echo PhpMyAdmin\Url::getFromRoute("/table/relation", ["db" => ($context["db"] ?? null), "table" => ($context["table"] ?? null)]);
-            echo "\" id=\"table_relation_id\" class=\"nav-link";
-            echo (((($context["route"] ?? null) == "/table/relation")) ? (" active") : (""));
-            echo "\">
-        ";
-            // line 11
-            echo \PhpMyAdmin\Html\Generator::getIcon("b_relations", _gettext("Relation view"), true);
-            echo "
-      </a>
-    </li>
-  </ul>
+    <!-- 关联试图 -->
+";
+            // line 15
+            echo "  </ul>
 ";
         }
-        // line 16
+        // line 17
         echo "
 <div id=\"structure_content\">
   ";
-        // line 18
-        $this->displayBlock('content', $context, $blocks);
         // line 19
+        $this->displayBlock('content', $context, $blocks);
+        // line 20
         echo "</div>
 ";
     }
 
-    // line 18
+    // line 19
     public function block_content($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -97,7 +87,7 @@ class __TwigTemplate_0e917ad89b2ed8f67e49f0b855814a5f591a4ea9232a96a9d96add74913
 
     public function getDebugInfo()
     {
-        return array (  83 => 18,  78 => 19,  76 => 18,  72 => 16,  64 => 11,  58 => 10,  50 => 5,  44 => 4,  40 => 2,  38 => 1,);
+        return array (  73 => 19,  68 => 20,  66 => 19,  62 => 17,  58 => 15,  50 => 5,  44 => 4,  40 => 2,  38 => 1,);
     }
 
     public function getSourceContext()

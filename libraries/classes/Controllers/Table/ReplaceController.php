@@ -16,6 +16,7 @@ use PhpMyAdmin\Message;
 use PhpMyAdmin\Plugins\IOTransformationsPlugin;
 use PhpMyAdmin\Relation;
 use PhpMyAdmin\Response;
+use PhpMyAdmin\SqlHistory;
 use PhpMyAdmin\Table;
 use PhpMyAdmin\Template;
 use PhpMyAdmin\Transformations;
@@ -72,7 +73,7 @@ final class ReplaceController extends AbstractController
 
     public function index(): void
     {
-        global $containerBuilder, $db, $table, $url_params, $message;
+        global $containerBuilder, $db, $table, $url_params, $message, $cfg;
         global $err_url, $mime_map, $unsaved_values, $active_page, $disp_query, $disp_message;
         global $goto_include, $loop_array, $using_key, $is_insert, $is_insertignore, $query;
         global $value_sets, $func_no_param, $func_optional_param, $gis_from_text_functions, $gis_from_wkb_functions;
@@ -501,6 +502,9 @@ final class ReplaceController extends AbstractController
          * ajax_page_request is present in the POST parameters.
          */
         if ($this->response->isAjax() && ! isset($_POST['ajax_page_request'])) {
+            // jophy
+            $sh = new SqlHistory($this->dbi);
+            $sh->common_save($_POST, $cfg['Server'], $GLOBALS['sql_query'], "replace");
             /**
              * If we are in grid editing, we need to process the relational and
              * transformed fields, if they were edited. After that, output the correct
@@ -593,6 +597,9 @@ final class ReplaceController extends AbstractController
 
         if (! empty($return_to_sql_query)) {
             $disp_query = $GLOBALS['sql_query'];
+            // jophy
+            $sh = new SqlHistory($this->dbi);
+            $sh->common_save($_POST, $cfg['Server'], $disp_query, "insert");
             $disp_message = $message;
             unset($message);
             $GLOBALS['sql_query'] = $return_to_sql_query;
@@ -631,7 +638,6 @@ final class ReplaceController extends AbstractController
             /** @var ChangeController $controller */
             $controller = $containerBuilder->get(ChangeController::class);
             $controller->index();
-
             return;
         }
 
