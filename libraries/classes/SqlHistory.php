@@ -104,4 +104,6 @@ class SqlHistory
         //$this->dbi->query($this->sql_query, DatabaseInterface::CONNECT_CONTROL);
     }
 
+
+
 }

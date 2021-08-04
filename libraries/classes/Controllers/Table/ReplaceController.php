@@ -447,6 +447,7 @@ final class ReplaceController extends AbstractController
             return;
         }
 
+
         /**
          * Executes the sql query and get the result, then move back to the calling
          * page
@@ -597,13 +598,11 @@ final class ReplaceController extends AbstractController
 
         if (! empty($return_to_sql_query)) {
             $disp_query = $GLOBALS['sql_query'];
-            // jophy
-            $sh = new SqlHistory($this->dbi);
-            $sh->common_save($_POST, $cfg['Server'], $disp_query, "insert");
             $disp_message = $message;
             unset($message);
             $GLOBALS['sql_query'] = $return_to_sql_query;
         }
+
 
         $this->addScriptFiles(['vendor/jquery/additional-methods.js', 'table/change.js']);
 
@@ -616,13 +615,18 @@ final class ReplaceController extends AbstractController
          */
         if (isset($_POST['after_insert']) && $_POST['after_insert'] === 'new_insert') {
             unset($_POST['where_clause']);
+            // jophy
+            $sh = new SqlHistory($this->dbi);
+            $sh->common_save($_POST, $cfg['Server'], $GLOBALS['sql_query'], "insert continue");
         }
 
         if ($goto_include === '/sql') {
             /** @var SqlController $controller */
             $controller = $containerBuilder->get(SqlController::class);
             $controller->index();
-
+            // jophy
+            $sh = new SqlHistory($this->dbi);
+            $sh->common_save($_POST, $cfg['Server'], $disp_query, "copy or edit row");
             return;
         }
 
@@ -642,10 +646,12 @@ final class ReplaceController extends AbstractController
         }
 
         if ($goto_include === '/table/sql') {
+            // jophy
+            $sh = new SqlHistory($this->dbi);
+            $sh->common_save($_POST, $cfg['Server'], $GLOBALS['sql_query'], "insert");
             /** @var TableSqlController $controller */
             $controller = $containerBuilder->get(TableSqlController::class);
             $controller->index();
-
             return;
         }
 

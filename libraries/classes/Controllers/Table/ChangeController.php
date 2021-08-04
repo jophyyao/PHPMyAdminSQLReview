@@ -31,8 +31,8 @@ class ChangeController extends AbstractController
 
     /**
      * @param Response $response
-     * @param string   $db       Database name.
-     * @param string   $table    Table name.
+     * @param string $db Database name.
+     * @param string $table Table name.
      */
     public function __construct(
         $response,
@@ -41,7 +41,8 @@ class ChangeController extends AbstractController
         $table,
         InsertEdit $insertEdit,
         Relation $relation
-    ) {
+    )
+    {
         parent::__construct($response, $template, $db, $table);
         $this->insertEdit = $insertEdit;
         $this->relation = $relation;
@@ -80,7 +81,7 @@ class ChangeController extends AbstractController
             $table
         );
         // Increase number of rows if unsaved rows are more
-        if (! empty($unsaved_values) && count($rows) < count($unsaved_values)) {
+        if (!empty($unsaved_values) && count($rows) < count($unsaved_values)) {
             $rows = array_fill(0, count($unsaved_values), false);
         }
 
@@ -99,9 +100,9 @@ class ChangeController extends AbstractController
 
         $_url_params = $this->insertEdit->getUrlParameters($db, $table);
         $err_url = $GLOBALS['goto'] . Url::getCommon(
-            $_url_params,
-            mb_strpos($GLOBALS['goto'], '?') === false ? '?' : '&'
-        );
+                $_url_params,
+                mb_strpos($GLOBALS['goto'], '?') === false ? '?' : '&'
+            );
         unset($_url_params);
 
         $comments_map = $this->insertEdit->getCommentsMap($db, $table);
@@ -124,7 +125,7 @@ class ChangeController extends AbstractController
          *
          * $disp_message come from /table/replace
          */
-        if (! empty($disp_message)) {
+        if (!empty($disp_message)) {
             $this->response->addHTML(Generator::getMessage($disp_message, null));
         }
 
@@ -147,20 +148,20 @@ class ChangeController extends AbstractController
          */
         // autocomplete feature of IE kills the "onchange" event handler and it
         //        must be replaced by the "onpropertychange" one in this case
-        $chg_evt_handler =  'onchange';
+        $chg_evt_handler = 'onchange';
         // Had to put the URI because when hosted on an https server,
         // some browsers send wrongly this form to the http server.
 
         $html_output = '';
         // Set if we passed the first timestamp field
         $timestamp_seen = false;
-        $columns_cnt     = count($table_columns);
+        $columns_cnt = count($table_columns);
 
-        $tabindex              = 0;
+        $tabindex = 0;
         $tabindex_for_function = +3000;
-        $tabindex_for_null     = +6000;
-        $tabindex_for_value    = 0;
-        $o_rows                = 0;
+        $tabindex_for_null = +6000;
+        $tabindex_for_value = 0;
+        $o_rows = 0;
         $biggest_max_file_size = 0;
 
         $url_params['db'] = $db;
@@ -194,15 +195,15 @@ class ChangeController extends AbstractController
 
         // user can toggle the display of Function column and column types
         // (currently does not work for multi-edits)
-        if (! $cfg['ShowFunctionFields'] || ! $cfg['ShowFieldTypesInDataEditView']) {
+        if (!$cfg['ShowFunctionFields'] || !$cfg['ShowFieldTypesInDataEditView']) {
             $html_output .= __('Show');
         }
 
-        if (! $cfg['ShowFunctionFields']) {
+        if (!$cfg['ShowFunctionFields']) {
             $html_output .= $this->insertEdit->showTypeOrFunction('function', $url_params, false);
         }
 
-        if (! $cfg['ShowFieldTypesInDataEditView']) {
+        if (!$cfg['ShowFieldTypesInDataEditView']) {
             $html_output .= $this->insertEdit->showTypeOrFunction('type', $url_params, false);
         }
 
@@ -261,7 +262,7 @@ class ChangeController extends AbstractController
 
         unset($unsaved_values, $checked, $repopulate, $GLOBALS['plugin_scripts']);
 
-        if (! isset($after_insert)) {
+        if (!isset($after_insert)) {
             $after_insert = 'back';
         }
 
@@ -299,7 +300,7 @@ class ChangeController extends AbstractController
     {
         global $active_page, $where_clause;
 
-        if (isset($_POST['goto']) && (! isset($_POST['rows_to_delete']) || ! is_array($_POST['rows_to_delete']))) {
+        if (isset($_POST['goto']) && (!isset($_POST['rows_to_delete']) || !is_array($_POST['rows_to_delete']))) {
             $this->response->setRequestStatus(false);
             $this->response->addJSON('message', __('No row selected.'));
 
