@@ -1813,11 +1813,12 @@ class Sql
 
 
         // jophy
-        if (preg_match('/(insert|update|delete|truncate|alter|rename|create|drop|replace)/im', $sql_query)) {
+        // skip file upload
+        if (preg_match('/(insert|update|delete|truncate|alter|rename|create|drop|replace)/im', $sql_query) && !isset($_POST['import_type'])) {
             global $cfg;
             $this->response = Response::getInstance();
             $sh = new SqlHistory($this->dbi, $this->response);
-            $sh->common_save($_POST, $cfg['Server'], $sql_query, "sql execute");
+            $sh->common_save($_POST, $cfg['Server'], $sql_query, 'sql execute');
         }
 
         [

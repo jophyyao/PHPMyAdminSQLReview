@@ -321,27 +321,28 @@ class Menu
             $tabs['import']['text'] = __('Import');
             $tabs['import']['active'] = $route === '/table/import';
         }
-        if (($is_superuser || $isCreateOrGrantUser)
-            && ! $isSystemSchema
-        ) {
-            $tabs['privileges']['route'] = '/server/privileges';
-            $tabs['privileges']['args']['checkprivsdb'] = $this->db;
-            $tabs['privileges']['args']['checkprivstable'] = $this->table;
-            // stay on table view
-            $tabs['privileges']['args']['viewing_mode'] = 'table';
-            $tabs['privileges']['text'] = __('Privileges');
-            $tabs['privileges']['icon'] = 's_rights';
-            $tabs['privileges']['active'] = $route === '/server/privileges';
-        }
+        // jophy del privileges
+//        if (($is_superuser || $isCreateOrGrantUser)
+//            && ! $isSystemSchema
+//        ) {
+//            $tabs['privileges']['route'] = '/server/privileges';
+//            $tabs['privileges']['args']['checkprivsdb'] = $this->db;
+//            $tabs['privileges']['args']['checkprivstable'] = $this->table;
+//            // stay on table view
+//            $tabs['privileges']['args']['viewing_mode'] = 'table';
+//            $tabs['privileges']['text'] = __('Privileges');
+//            $tabs['privileges']['icon'] = 's_rights';
+//            $tabs['privileges']['active'] = $route === '/server/privileges';
+//        }
         /**
          * Don't display "Operations" for views and information_schema
          */
-        if (! $tbl_is_view && ! $isSystemSchema) {
-            $tabs['operation']['icon'] = 'b_tblops';
-            $tabs['operation']['route'] = '/table/operations';
-            $tabs['operation']['text'] = __('Operations');
-            $tabs['operation']['active'] = $route === '/table/operations';
-        }
+//        if (! $tbl_is_view && ! $isSystemSchema) {
+//            $tabs['operation']['icon'] = 'b_tblops';
+//            $tabs['operation']['route'] = '/table/operations';
+//            $tabs['operation']['text'] = __('Operations');
+//            $tabs['operation']['active'] = $route === '/table/operations';
+//        }
         /**
          * Views support a limited number of operations
          */
@@ -358,19 +359,19 @@ class Menu
             $tabs['tracking']['route'] = '/table/tracking';
             $tabs['tracking']['active'] = $route === '/table/tracking';
         }
-        if (! $isSystemSchema
-            && Util::currentUserHasPrivilege(
-                'TRIGGER',
-                $this->db,
-                $this->table
-            )
-            && ! $tbl_is_view
-        ) {
-            $tabs['triggers']['route'] = '/table/triggers';
-            $tabs['triggers']['text'] = __('Triggers');
-            $tabs['triggers']['icon'] = 'b_triggers';
-            $tabs['triggers']['active'] = $route === '/table/triggers';
-        }
+//        if (! $isSystemSchema
+//            && Util::currentUserHasPrivilege(
+//                'TRIGGER',
+//                $this->db,
+//                $this->table
+//            )
+//            && ! $tbl_is_view
+//        ) {
+//            $tabs['triggers']['route'] = '/table/triggers';
+//            $tabs['triggers']['text'] = __('Triggers');
+//            $tabs['triggers']['icon'] = 'b_triggers';
+//            $tabs['triggers']['active'] = $route === '/table/triggers';
+//        }
 
         return $tabs;
     }
@@ -437,39 +438,39 @@ class Menu
             $tabs['import']['icon'] = 'b_import';
             $tabs['import']['active'] = $route === '/database/import';
 
-            $tabs['operation']['route'] = '/database/operations';
-            $tabs['operation']['text'] = __('Operations');
-            $tabs['operation']['icon'] = 'b_tblops';
-            $tabs['operation']['active'] = $route === '/database/operations';
+//            $tabs['operation']['route'] = '/database/operations';
+//            $tabs['operation']['text'] = __('Operations');
+//            $tabs['operation']['icon'] = 'b_tblops';
+//            $tabs['operation']['active'] = $route === '/database/operations';
 
-            if ($is_superuser || $isCreateOrGrantUser) {
-                $tabs['privileges']['route'] = '/server/privileges';
-                $tabs['privileges']['args']['checkprivsdb'] = $this->db;
-                // stay on database view
-                $tabs['privileges']['args']['viewing_mode'] = 'db';
-                $tabs['privileges']['text'] = __('Privileges');
-                $tabs['privileges']['icon'] = 's_rights';
-                $tabs['privileges']['active'] = $route === '/server/privileges';
-            }
+//            if ($is_superuser || $isCreateOrGrantUser) {
+//                $tabs['privileges']['route'] = '/server/privileges';
+//                $tabs['privileges']['args']['checkprivsdb'] = $this->db;
+//                // stay on database view
+//                $tabs['privileges']['args']['viewing_mode'] = 'db';
+//                $tabs['privileges']['text'] = __('Privileges');
+//                $tabs['privileges']['icon'] = 's_rights';
+//                $tabs['privileges']['active'] = $route === '/server/privileges';
+//            }
 
-            $tabs['routines']['route'] = '/database/routines';
-            $tabs['routines']['text'] = __('Routines');
-            $tabs['routines']['icon'] = 'b_routines';
-            $tabs['routines']['active'] = $route === '/database/routines';
+//            $tabs['routines']['route'] = '/database/routines';
+//            $tabs['routines']['text'] = __('Routines');
+//            $tabs['routines']['icon'] = 'b_routines';
+//            $tabs['routines']['active'] = $route === '/database/routines';
 
-            if (Util::currentUserHasPrivilege('EVENT', $this->db)) {
-                $tabs['events']['route'] = '/database/events';
-                $tabs['events']['text'] = __('Events');
-                $tabs['events']['icon'] = 'b_events';
-                $tabs['events']['active'] = $route === '/database/events';
-            }
+//            if (Util::currentUserHasPrivilege('EVENT', $this->db)) {
+//                $tabs['events']['route'] = '/database/events';
+//                $tabs['events']['text'] = __('Events');
+//                $tabs['events']['icon'] = 'b_events';
+//                $tabs['events']['active'] = $route === '/database/events';
+//            }
 
-            if (Util::currentUserHasPrivilege('TRIGGER', $this->db)) {
-                $tabs['triggers']['route'] = '/database/triggers';
-                $tabs['triggers']['text'] = __('Triggers');
-                $tabs['triggers']['icon'] = 'b_triggers';
-                $tabs['triggers']['active'] = $route === '/database/triggers';
-            }
+//            if (Util::currentUserHasPrivilege('TRIGGER', $this->db)) {
+//                $tabs['triggers']['route'] = '/database/triggers';
+//                $tabs['triggers']['text'] = __('Triggers');
+//                $tabs['triggers']['icon'] = 'b_triggers';
+//                $tabs['triggers']['active'] = $route === '/database/triggers';
+//            }
         }
 
         if (Tracker::isActive() && ! $isSystemSchema) {
@@ -478,13 +479,13 @@ class Menu
             $tabs['tracking']['route'] = '/database/tracking';
             $tabs['tracking']['active'] = $route === '/database/tracking';
         }
-
-        if (! $isSystemSchema) {
-            $tabs['designer']['text'] = __('Designer');
-            $tabs['designer']['icon'] = 'b_relations';
-            $tabs['designer']['route'] = '/database/designer';
-            $tabs['designer']['active'] = $route === '/database/designer';
-        }
+//
+//        if (! $isSystemSchema) {
+//            $tabs['designer']['text'] = __('Designer');
+//            $tabs['designer']['icon'] = 'b_relations';
+//            $tabs['designer']['route'] = '/database/designer';
+//            $tabs['designer']['active'] = $route === '/database/designer';
+//        }
 
         if (! $isSystemSchema
             && $cfgRelation['centralcolumnswork']

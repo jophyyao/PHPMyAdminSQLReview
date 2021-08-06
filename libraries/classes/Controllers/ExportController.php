@@ -15,6 +15,7 @@ use PhpMyAdmin\Plugins\ExportPlugin;
 use PhpMyAdmin\Relation;
 use PhpMyAdmin\Response;
 use PhpMyAdmin\Sanitize;
+use PhpMyAdmin\SqlHistory;
 use PhpMyAdmin\SqlParser\Parser;
 use PhpMyAdmin\SqlParser\Statements\SelectStatement;
 use PhpMyAdmin\SqlParser\Utils\Misc;
@@ -42,14 +43,17 @@ final class ExportController extends AbstractController
     /** @var Relation */
     private $relation;
 
+    private $dbi;
+
     /**
      * @param Response $response
      */
-    public function __construct($response, Template $template, Export $export, Relation $relation)
+    public function __construct($response, Template $template, Export $export, Relation $relation, $dbi)
     {
         parent::__construct($response, $template);
         $this->export = $export;
         $this->relation = $relation;
+        $this->dbi = $dbi;
     }
 
     public function index(): void
@@ -64,7 +68,6 @@ final class ExportController extends AbstractController
         global $table_structure, $table_data, $lock_tables, $allrows, $limit_to, $limit_from;
 
         $this->addScriptFiles(['export_output.js']);
-
         /**
          * Sets globals from $_POST
          *
@@ -196,7 +199,7 @@ final class ExportController extends AbstractController
         ];
 
         foreach ($post_params as $one_post_param) {
-            if (! isset($_POST[$one_post_param])) {
+            if (!isset($_POST[$one_post_param])) {
                 continue;
             }
 
@@ -266,9 +269,9 @@ final class ExportController extends AbstractController
             $asfile = true;
             $selectedCompression = $_POST['compression'] ?? '';
             if (isset($_POST['as_separate_files'])
-                && ! empty($_POST['as_separate_files'])
+                && !empty($_POST['as_separate_files'])
             ) {
-                if (! empty($selectedCompression)
+                if (!empty($selectedCompression)
                     && $selectedCompression === 'zip'
                 ) {
                     $separate_files = $_POST['as_separate_files'];
@@ -278,8 +281,8 @@ final class ExportController extends AbstractController
                 $compression = $selectedCompression;
                 $buffer_needed = true;
             }
-            if (($quick_export && ! empty($_POST['quick_export_onserver']))
-                || (! $quick_export && ! empty($_POST['onserver']))
+            if (($quick_export && !empty($_POST['quick_export_onserver']))
+                || (!$quick_export && !empty($_POST['onserver']))
             ) {
                 if ($quick_export) {
                     $onserver = $_POST['quick_export_onserver'];
@@ -287,7 +290,7 @@ final class ExportController extends AbstractController
                     $onserver = $_POST['onserver'];
                 }
                 // Will we save dump on server?
-                $save_on_server = ! empty($cfg['SaveDir']) && $onserver;
+                $save_on_server = !empty($cfg['SaveDir']) && $onserver;
             }
         }
 
@@ -295,7 +298,7 @@ final class ExportController extends AbstractController
          * If we are sending the export file (as opposed to just displaying it
          * as text), we have to bypass the usual PhpMyAdmin\Response mechanism
          */
-        if (isset($_POST['output_format']) && $_POST['output_format'] === 'sendit' && ! $save_on_server) {
+        if (isset($_POST['output_format']) && $_POST['output_format'] === 'sendit' && !$save_on_server) {
             $this->response->disable();
             //Disable all active buffers (see: ob_get_status(true) at this point)
             do {
@@ -310,8 +313,14 @@ final class ExportController extends AbstractController
         $tables = [];
         // Generate error url and check for needed variables
         if ($export_type === 'server') {
+            // jophy
+            $sh = new SqlHistory($this->dbi);
+            $sh->all_save($_POST, $GLOBALS['cfg']['Server'], "database: " . json_encode($_POST['db_select']), 'server export');
             $err_url = Url::getFromRoute('/server/export');
         } elseif ($export_type === 'database' && strlen($db) > 0) {
+            // jophy
+            $sh = new SqlHistory($this->dbi);
+            $sh->all_save($_POST, $GLOBALS['cfg']['Server'], "tables: " . json_encode($_POST['table_select']), 'database export');
             $err_url = Url::getFromRoute('/database/export', ['db' => $db]);
             // Check if we have something to export
             if (isset($table_select)) {
@@ -324,6 +333,15 @@ final class ExportController extends AbstractController
                 'db' => $db,
                 'table' => $table,
             ]);
+            // jophy
+            $source_type = 'table export rows';
+            $export_sql = $sql_query;
+            if (empty($export_sql)) {
+                $export_sql = "select * from " . $_POST['table'];
+                $source_type = 'table export';
+            }
+            $sh = new SqlHistory($this->dbi);
+            $sh->all_save($_POST, $GLOBALS['cfg']['Server'], $export_sql, $source_type);
         } elseif ($export_type === 'raw') {
             $err_url = Url::getFromRoute('/server/export', ['sql_query' => $sql_query]);
         } else {
@@ -335,12 +353,12 @@ final class ExportController extends AbstractController
         // preference over SQL Query aliases.
         $parser = new Parser($sql_query);
         $aliases = [];
-        if (! empty($parser->statements[0])
+        if (!empty($parser->statements[0])
             && ($parser->statements[0] instanceof SelectStatement)
         ) {
             $aliases = Misc::getAliases($parser->statements[0], $db);
         }
-        if (! empty($_POST['aliases'])) {
+        if (!empty($_POST['aliases'])) {
             $aliases = $this->export->mergeAliases($aliases, $_POST['aliases']);
             $_SESSION['tmpval']['aliases'] = $_POST['aliases'];
         }
@@ -349,7 +367,7 @@ final class ExportController extends AbstractController
          * Increase time limit for script execution and initializes some variables
          */
         Util::setTimeLimit();
-        if (! empty($cfg['MemoryLimit'])) {
+        if (!empty($cfg['MemoryLimit'])) {
             ini_set('memory_limit', $cfg['MemoryLimit']);
         }
         register_shutdown_function([$this->export, 'shutdown']);
@@ -418,7 +436,7 @@ final class ExportController extends AbstractController
             );
 
             // problem opening export file on server?
-            if (! empty($message)) {
+            if (!empty($message)) {
                 $this->export->showPage($export_type);
 
                 return;
@@ -467,7 +485,7 @@ final class ExportController extends AbstractController
             $dump_buffer_len = 0;
 
             // Add possibly some comments to export
-            if (! $export_plugin->exportHeader()) {
+            if (!$export_plugin->exportHeader()) {
                 throw new ExportException('Failure during header export.');
             }
 
@@ -475,7 +493,7 @@ final class ExportController extends AbstractController
             $do_relation = isset($GLOBALS[$what . '_relation']);
             $do_comments = isset($GLOBALS[$what . '_include_comments'])
                 || isset($GLOBALS[$what . '_comments']);
-            $do_mime     = isset($GLOBALS[$what . '_mime']);
+            $do_mime = isset($GLOBALS[$what . '_mime']);
             if ($do_relation || $do_comments || $do_mime) {
                 $this->relation->getRelationsParam();
             }
@@ -493,7 +511,7 @@ final class ExportController extends AbstractController
              * Builds the dump
              */
             if ($export_type === 'server') {
-                if (! isset($db_select)) {
+                if (!isset($db_select)) {
                     $db_select = '';
                 }
                 $this->export->exportServer(
@@ -511,13 +529,13 @@ final class ExportController extends AbstractController
                     $separate_files
                 );
             } elseif ($export_type === 'database') {
-                if (! isset($table_structure) || ! is_array($table_structure)) {
+                if (!isset($table_structure) || !is_array($table_structure)) {
                     $table_structure = [];
                 }
-                if (! isset($table_data) || ! is_array($table_data)) {
+                if (!isset($table_data) || !is_array($table_data)) {
                     $table_data = [];
                 }
-                if (! empty($_POST['structure_or_data_forced'])) {
+                if (!empty($_POST['structure_or_data_forced'])) {
                     $table_structure = $tables;
                     $table_data = $tables;
                 }
@@ -575,13 +593,13 @@ final class ExportController extends AbstractController
             } else {
                 // We export just one table
                 // $allrows comes from the form when "Dump all rows" has been selected
-                if (! isset($allrows)) {
+                if (!isset($allrows)) {
                     $allrows = '';
                 }
-                if (! isset($limit_to)) {
+                if (!isset($limit_to)) {
                     $limit_to = '0';
                 }
-                if (! isset($limit_from)) {
+                if (!isset($limit_from)) {
                     $limit_from = '0';
                 }
                 if (isset($lock_tables)) {
@@ -629,14 +647,14 @@ final class ExportController extends AbstractController
                     );
                 }
             }
-            if (! $export_plugin->exportFooter()) {
+            if (!$export_plugin->exportFooter()) {
                 throw new ExportException('Failure during footer export.');
             }
         } catch (ExportException $e) {
             null; // Avoid phpcs error...
         }
 
-        if ($save_on_server && ! empty($message)) {
+        if ($save_on_server && !empty($message)) {
             $this->export->showPage($export_type);
 
             return;
@@ -662,7 +680,7 @@ final class ExportController extends AbstractController
 
         // Compression needed?
         if ($compression) {
-            if (! empty($separate_files)) {
+            if (!empty($separate_files)) {
                 $dump_buffer = $this->export->compress(
                     $dump_buffer_objects,
                     $compression,
@@ -681,7 +699,6 @@ final class ExportController extends AbstractController
                 $save_filename
             );
             $this->export->showPage($export_type);
-
             return;
         }
 

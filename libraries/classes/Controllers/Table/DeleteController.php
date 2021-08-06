@@ -25,9 +25,9 @@ class DeleteController extends AbstractController
     private $dbi;
 
     /**
-     * @param Response          $response
-     * @param string            $db       Database name.
-     * @param string            $table    Table name.
+     * @param Response $response
+     * @param string $db Database name.
+     * @param string $table Table name.
      * @param DatabaseInterface $dbi
      */
     public function __construct($response, Template $template, $db, $table, $dbi)
@@ -58,6 +58,7 @@ class DeleteController extends AbstractController
             $default_fk_check_value = Util::handleDisableFKCheckInit();
             $sql_query = '';
 
+            $del_query = '';
             foreach ($selected as $row) {
                 $query = sprintf(
                     'DELETE FROM %s WHERE %s LIMIT 1;',
@@ -67,12 +68,13 @@ class DeleteController extends AbstractController
                 $sql_query .= $query . "\n";
                 $this->dbi->selectDb($db);
                 $this->dbi->query($query);
-                // jophy
-                $sh = new SqlHistory($this->dbi);
-                $sh->common_save($_POST, $cfg['Server'], $query, "multiple delete");
+                $del_query .= $query;
             }
+            // jophy
+            $sh = new SqlHistory($this->dbi);
+            $sh->common_save($_POST, $cfg['Server'], $del_query, "multiple delete");
 
-            if (! empty($_REQUEST['pos'])) {
+            if (!empty($_REQUEST['pos'])) {
                 $_REQUEST['pos'] = $sql->calculatePosForLastPage(
                     $db,
                     $table,
@@ -120,7 +122,7 @@ class DeleteController extends AbstractController
 
         $selected = $_POST['rows_to_delete'] ?? null;
 
-        if (! isset($selected) || ! is_array($selected)) {
+        if (!isset($selected) || !is_array($selected)) {
             $this->response->setRequestStatus(false);
             $this->response->addJSON('message', __('No row selected.'));
 

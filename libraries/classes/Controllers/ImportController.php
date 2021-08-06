@@ -18,6 +18,7 @@ use PhpMyAdmin\Plugins;
 use PhpMyAdmin\Plugins\ImportPlugin;
 use PhpMyAdmin\Response;
 use PhpMyAdmin\Sql;
+use PhpMyAdmin\SqlHistory;
 use PhpMyAdmin\Template;
 use PhpMyAdmin\Url;
 use PhpMyAdmin\Util;
@@ -320,10 +321,19 @@ final class ImportController extends AbstractController
 
         // Create error and goto url
         if ($import_type === 'table') {
+            // jophy
+            $sh = new SqlHistory($this->dbi);
+            $sh->all_save($_POST, $GLOBALS['cfg']['Server'], json_encode($_FILES), 'table import');
             $goto = Url::getFromRoute('/table/import');
         } elseif ($import_type === 'database') {
+            // jophy
+            $sh = new SqlHistory($this->dbi);
+            $sh->all_save($_POST, $GLOBALS['cfg']['Server'], json_encode($_FILES), 'database import');
             $goto = Url::getFromRoute('/database/import');
         } elseif ($import_type === 'server') {
+            // jophy
+            $sh = new SqlHistory($this->dbi);
+            $sh->all_save($_POST, $GLOBALS['cfg']['Server'], json_encode($_FILES), 'server import');
             $goto = Url::getFromRoute('/server/import');
         } elseif (empty($goto) || !preg_match('@^index\.php$@i', $goto)) {
             if (strlen($table) > 0 && strlen($db) > 0) {

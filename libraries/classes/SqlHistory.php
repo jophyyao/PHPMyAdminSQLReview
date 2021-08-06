@@ -74,6 +74,8 @@ class SqlHistory
     public function common_save($post, $cfg_server, $sql_query, $source_type): bool
     {
         if (preg_match('/^(insert|update|delete|truncate|alter|rename|create|drop|replace)/im', $this->dbi->escapeString($sql_query))) {
+            if (empty($post['db'])) $post['db'] = '';
+            if (empty($post['table'])) $post['table'] = '';
             $this->pma_query = "'" . str_ireplace(array("\r", "\n", '\r', '\n'), '', $this->dbi->escapeString($sql_query)) . "',";
             $this->db_name = $post['db'];
             $this->table = $post['table'];
@@ -85,6 +87,24 @@ class SqlHistory
         } else {
             return false;
         }
+    }
+
+    /*
+     * export use
+     * save all sql string start
+     */
+    public function all_save($post, $cfg_server, $sql_query, $source_type): bool
+    {
+        if (empty($post['db'])) $post['db'] = 'ALL';
+        if (empty($post['table'])) $post['table'] = 'ALL';
+        $this->pma_query = "'" . str_ireplace(array("\r", "\n", '\r', '\n'), '', $this->dbi->escapeString($sql_query)) . "',";
+        $this->db_name = $post['db'];
+        $this->table = $post['table'];
+        $this->db_user = $cfg_server['user'];
+        $this->client_ip = $cfg_server['host'];
+        $this->source_type = $source_type;
+        $this->sql_save_submit();
+        return true;
     }
 
     private function sql_save_submit()
@@ -103,7 +123,6 @@ class SqlHistory
         $this->logdb_save();
         //$this->dbi->query($this->sql_query, DatabaseInterface::CONNECT_CONTROL);
     }
-
 
 
 }

@@ -4,10 +4,10 @@
   审计功能
 表浏览:
   审计内容:
-    1.编辑字段 (copy or edit row)
-    2.批量编辑
-    3.复制行 (copy or edit row)
-    4.批量复制
+    1.编辑字段 (copy or edit)
+    2.批量编辑 (copy or edit)
+    3.复制行 (copy or edit)
+    4.批量复制 (copy or edit)
     5.删除行 (sql execute)
     6.批量删除 (multiple delete)
     7.双击更新 (replace)
@@ -40,4 +40,16 @@
   审计内容:
     1.插入 (insert)
     2.插入->然后->返回新数据 (insert continue)
+表导出
+  审计内容:
+    1.行导出 (table export rows)
+    2.表导出 (table export)
+    3.库导出 (database export)
+    4.全量导出 (server export)
+表导入
+  审计内容:
+    1.表导入
+    2.库导入
+    3.全量导入
+
 

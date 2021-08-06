@@ -245,6 +245,7 @@ return [
                 '$template' => '@template',
                 '$export' => '@export',
                 '$relation' => '@relation',
+                '$dbi' => '@dbi',
             ],
         ],
         PhpMyAdmin\Controllers\ExportTemplateController::class => [

@@ -626,7 +626,7 @@ final class ReplaceController extends AbstractController
             $controller->index();
             // jophy
             $sh = new SqlHistory($this->dbi);
-            $sh->common_save($_POST, $cfg['Server'], $disp_query, "copy or edit row");
+            $sh->common_save($_POST, $cfg['Server'], $disp_query, "copy or edit");
             return;
         }
 
