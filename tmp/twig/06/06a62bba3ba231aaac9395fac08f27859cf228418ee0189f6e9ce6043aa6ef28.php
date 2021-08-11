@@ -82,9 +82,9 @@ class __TwigTemplate_801b0bac6a91b6b8865692ae34f1c677a01913850624bfc28dff7255439
                 echo _gettext("You are using the demo server. You can do anything here, but please do not change root, debian-sys-maint and pma users. More information is available at %s.");
                 // line 25
                 echo "                ";
-                $___internal_7610c6882fb5bb150b3417bf9122787485e0bc9064c7c6ff1d911adec0f2183d_ = ('' === $tmp = ob_get_clean()) ? '' : new Markup($tmp, $this->env->getCharset());
+                $___internal_2726e29848b22c1f2d9cbd47d04eaaa52c5c30a66b2d73636128a3caf00c490d_ = ('' === $tmp = ob_get_clean()) ? '' : new Markup($tmp, $this->env->getCharset());
                 // line 21
-                echo sprintf($___internal_7610c6882fb5bb150b3417bf9122787485e0bc9064c7c6ff1d911adec0f2183d_, "<a href=\"url.php?url=https://demo.phpmyadmin.net/\" target=\"_blank\" rel=\"noopener noreferrer\">demo.phpmyadmin.net</a>");
+                echo sprintf($___internal_2726e29848b22c1f2d9cbd47d04eaaa52c5c30a66b2d73636128a3caf00c490d_, "<a href=\"url.php?url=https://demo.phpmyadmin.net/\" target=\"_blank\" rel=\"noopener noreferrer\">demo.phpmyadmin.net</a>");
                 // line 26
                 echo "              </div>
             </div>
@@ -470,7 +470,7 @@ class __TwigTemplate_801b0bac6a91b6b8865692ae34f1c677a01913850624bfc28dff7255439
         echo "
           <div class=\"card mt-4\">
             <div class=\"card-header\">
-              KingnetMyAdmin
+              PhpMyAdmin
             </div>
             <ul class=\"list-group list-group-flush\">
               <li id=\"li_pma_version\" class=\"list-group-item";
