@@ -111,7 +111,7 @@ class LogMysql
      */
     public function query($sql)
     {
-        mysqli_query($this->con,"SET NAMES 'UTF8'") ;
+        mysqli_query($this->con,"SET NAMES 'UTF8'") or die ('set names error!');
         try {
             $queryRess = mysqli_query($this->con, $sql);
         } catch (Error $e) {
