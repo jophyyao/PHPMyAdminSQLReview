@@ -45,11 +45,14 @@
     1.行导出 (table export rows)
     2.表导出 (table export)
     3.库导出 (database export)
-    4.全量导出 (server export)
+    4.实例导出 (server export)
 表导入
   审计内容:
-    1.表导入
-    2.库导入
-    3.全量导入
+    1.表导入 (table import)
+    2.库导入 (database import)
+    3.实例导入 (server import)
+首页
+  审计内容
+    1.创建数据库 
 
 

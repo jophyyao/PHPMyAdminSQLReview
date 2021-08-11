@@ -2173,9 +2173,9 @@ class Relation
                 __('%sCreate%s missing phpMyAdmin configuration storage tables.')
             );
         }
-        $message->addParamHtml(
-            '<a href="' . Url::getFromRoute('/check-relations') . '" data-post="' . Url::getCommon($params, '') . '">'
-        );
+//        $message->addParamHtml(
+//            '<a href="' . Url::getFromRoute('/check-relations') . '" data-post="' . Url::getCommon($params, '') . '">'
+//        );
         $message->addParamHtml('</a>');
 
         return $retval . $message->getDisplay();

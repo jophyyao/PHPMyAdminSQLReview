@@ -46,13 +46,9 @@ class __TwigTemplate_63b890d6af6a6cace7ee82545e7fad36bb29f9f5374c65560227eab463a
             echo ($context["self_link"] ?? null);
             echo "
 
-  <div class=\"clearfloat\" id=\"pma_errors\">
-    ";
-            // line 8
-            echo ($context["error_messages"] ?? null);
+";
+            // line 10
             echo "
-  </div>
-
   ";
             // line 11
             echo ($context["scripts"] ?? null);
@@ -99,7 +95,7 @@ class __TwigTemplate_63b890d6af6a6cace7ee82545e7fad36bb29f9f5374c65560227eab463a
 
     public function getDebugInfo()
     {
-        return array (  84 => 22,  82 => 21,  77 => 19,  74 => 18,  68 => 15,  65 => 14,  63 => 13,  58 => 11,  52 => 8,  45 => 5,  43 => 4,  39 => 2,  37 => 1,);
+        return array (  80 => 22,  78 => 21,  73 => 19,  70 => 18,  64 => 15,  61 => 14,  59 => 13,  54 => 11,  51 => 10,  45 => 5,  43 => 4,  39 => 2,  37 => 1,);
     }
 
     public function getSourceContext()

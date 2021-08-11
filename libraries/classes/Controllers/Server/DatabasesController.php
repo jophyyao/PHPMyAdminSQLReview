@@ -16,6 +16,7 @@ use PhpMyAdmin\Query\Utilities;
 use PhpMyAdmin\RelationCleanup;
 use PhpMyAdmin\ReplicationInfo;
 use PhpMyAdmin\Response;
+use PhpMyAdmin\SqlHistory;
 use PhpMyAdmin\Template;
 use PhpMyAdmin\Transformations;
 use PhpMyAdmin\Url;
@@ -64,7 +65,7 @@ class DatabasesController extends AbstractController
     private $dbi;
 
     /**
-     * @param Response          $response
+     * @param Response $response
      * @param DatabaseInterface $dbi
      */
     public function __construct(
@@ -73,7 +74,8 @@ class DatabasesController extends AbstractController
         Transformations $transformations,
         RelationCleanup $relationCleanup,
         $dbi
-    ) {
+    )
+    {
         parent::__construct($response, $template);
         $this->transformations = $transformations;
         $this->relationCleanup = $relationCleanup;
@@ -109,8 +111,8 @@ class DatabasesController extends AbstractController
         $replicaInfo = $replicationInfo->getReplicaInfo();
 
         $this->setSortDetails($params['sort_by'], $params['sort_order']);
-        $this->hasStatistics = ! empty($params['statistics']);
-        $this->position = ! empty($params['pos']) ? (int) $params['pos'] : 0;
+        $this->hasStatistics = !empty($params['statistics']);
+        $this->position = !empty($params['pos']) ? (int)$params['pos'] : 0;
 
         /**
          * Gets the databases list
@@ -193,7 +195,7 @@ class DatabasesController extends AbstractController
             'db_collation' => $_POST['db_collation'] ?? null,
         ];
 
-        if (! isset($params['new_db']) || mb_strlen($params['new_db']) === 0 || ! $this->response->isAjax()) {
+        if (!isset($params['new_db']) || mb_strlen($params['new_db']) === 0 || !$this->response->isAjax()) {
             $this->response->addJSON(['message' => Message::error()]);
 
             return;
@@ -210,7 +212,7 @@ class DatabasesController extends AbstractController
          * Builds and executes the db creation sql query
          */
         $sqlQuery = 'CREATE DATABASE ' . Util::backquote($params['new_db']);
-        if (! empty($params['db_collation'])) {
+        if (!empty($params['db_collation'])) {
             [$databaseCharset] = explode('_', $params['db_collation']);
             $charsets = Charsets::getCharsets(
                 $this->dbi,
@@ -231,11 +233,11 @@ class DatabasesController extends AbstractController
 
         $result = $this->dbi->tryQuery($sqlQuery);
 
-        if (! $result) {
+        if (!$result) {
             // avoid displaying the not-created db name in header or navi panel
             $db = '';
 
-            $message = Message::rawError((string) $this->dbi->getError());
+            $message = Message::rawError((string)$this->dbi->getError());
             $json = ['message' => $message];
 
             $this->response->setRequestStatus(false);
@@ -244,6 +246,10 @@ class DatabasesController extends AbstractController
 
             $message = Message::success(__('Database %1$s has been created.'));
             $message->addParam($params['new_db']);
+
+            // jophy
+            $sh = new SqlHistory($this->dbi);
+            $sh->common_save($_POST, $cfg['Server'], $sqlQuery, "create database");
 
             $scriptName = Util::getScriptNameForOption(
                 $cfg['DefaultTabDatabase'],
@@ -254,9 +260,9 @@ class DatabasesController extends AbstractController
                 'message' => $message,
                 'sql_query' => Generator::getMessage('', $sqlQuery, 'success'),
                 'url' => $scriptName . Url::getCommon(
-                    ['db' => $params['new_db']],
-                    strpos($scriptName, '?') === false ? '?' : '&'
-                ),
+                        ['db' => $params['new_db']],
+                        strpos($scriptName, '?') === false ? '?' : '&'
+                    ),
             ];
         }
 
@@ -277,9 +283,9 @@ class DatabasesController extends AbstractController
         /** @var Message|int $message */
         $message = -1;
 
-        if (! isset($params['drop_selected_dbs'])
-            || ! $this->response->isAjax()
-            || (! $this->dbi->isSuperUser() && ! $cfg['AllowUserDropDatabase'])
+        if (!isset($params['drop_selected_dbs'])
+            || !$this->response->isAjax()
+            || (!$this->dbi->isSuperUser() && !$cfg['AllowUserDropDatabase'])
         ) {
             $message = Message::error();
             $json = ['message' => $message];
@@ -289,7 +295,7 @@ class DatabasesController extends AbstractController
             return;
         }
 
-        if (! isset($params['selected_dbs'])) {
+        if (!isset($params['selected_dbs'])) {
             $message = Message::error(__('No databases selected.'));
             $json = ['message' => $message];
             $this->response->setRequestStatus($message->isSuccess());
@@ -327,6 +333,9 @@ class DatabasesController extends AbstractController
                     $numberOfDatabases
                 )
             );
+            // jophy
+            $sh = new SqlHistory($this->dbi);
+            $sh->common_save($_POST, $cfg['Server'], $sqlQuery, "drop database");
             $message->addParam($numberOfDatabases);
         }
 
@@ -342,7 +351,7 @@ class DatabasesController extends AbstractController
     /**
      * Extracts parameters sort order and sort by
      *
-     * @param string|null $sortBy    sort by
+     * @param string|null $sortBy sort by
      * @param string|null $sortOrder sort order
      */
     private function setSortDetails(?string $sortBy, ?string $sortOrder): void
@@ -367,7 +376,7 @@ class DatabasesController extends AbstractController
         }
 
         $this->sortOrder = 'asc';
-        if (! isset($sortOrder)
+        if (!isset($sortOrder)
             || mb_strtolower($sortOrder) !== 'desc'
         ) {
             return;
@@ -398,10 +407,10 @@ class DatabasesController extends AbstractController
                 $key = array_search($database['SCHEMA_NAME'], $primaryInfo['Ignore_DB']);
                 $replication['master']['is_replicated'] = false;
 
-                if (strlen((string) $key) === 0) {
+                if (strlen((string)$key) === 0) {
                     $key = array_search($database['SCHEMA_NAME'], $primaryInfo['Do_DB']);
 
-                    if (strlen((string) $key) > 0 || count($primaryInfo['Do_DB']) === 0) {
+                    if (strlen((string)$key) > 0 || count($primaryInfo['Do_DB']) === 0) {
                         $replication['master']['is_replicated'] = true;
                     }
                 }
@@ -411,10 +420,10 @@ class DatabasesController extends AbstractController
                 $key = array_search($database['SCHEMA_NAME'], $replicaInfo['Ignore_DB']);
                 $replication['slave']['is_replicated'] = false;
 
-                if (strlen((string) $key) === 0) {
+                if (strlen((string)$key) === 0) {
                     $key = array_search($database['SCHEMA_NAME'], $replicaInfo['Do_DB']);
 
-                    if (strlen((string) $key) > 0 || count($replicaInfo['Do_DB']) === 0) {
+                    if (strlen((string)$key) > 0 || count($replicaInfo['Do_DB']) === 0) {
                         $replication['slave']['is_replicated'] = true;
                     }
                 }
@@ -424,7 +433,7 @@ class DatabasesController extends AbstractController
             if ($this->hasStatistics) {
                 foreach (array_keys($statistics) as $key) {
                     $statistics[$key]['raw'] = $database[$key] ?? null;
-                    $totalStatistics[$key]['raw'] += (int) $database[$key] ?? 0;
+                    $totalStatistics[$key]['raw'] += (int)$database[$key] ?? 0;
                 }
             }
 

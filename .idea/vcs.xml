@@ -2,5 +2,8 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/themes/AIOFrame" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/themes/blueberry" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/themes/phpmyadmin-blueberry-theme" vcs="Git" />
   </component>
 </project>

@@ -33,16 +33,6 @@ class __TwigTemplate_1ab009198c4a7481b373f20e0d30d8a136fb0470969051a52a4570e9610
     protected function doDisplay(array $context, array $blocks = [])
     {
         $macros = $this->macros;
-        // line 1
-        echo "<div class=\"alert alert-";
-        echo twig_escape_filter($this->env, ($context["context"] ?? null), "html", null, true);
-        echo "\" role=\"alert\">
-  ";
-        // line 2
-        echo ($context["message"] ?? null);
-        echo "
-</div>
-";
     }
 
     public function getTemplateName()
@@ -50,14 +40,9 @@ class __TwigTemplate_1ab009198c4a7481b373f20e0d30d8a136fb0470969051a52a4570e9610
         return "message.twig";
     }
 
-    public function isTraitable()
-    {
-        return false;
-    }
-
     public function getDebugInfo()
     {
-        return array (  42 => 2,  37 => 1,);
+        return array ();
     }
 
     public function getSourceContext()

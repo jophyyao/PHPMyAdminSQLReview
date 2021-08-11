@@ -306,9 +306,11 @@ class ThemeManager
                 $this->themesPath . $PMA_Theme,
                 ROOT_PATH . $this->themesPath . $PMA_Theme . '/'
             );
+
             if (! $new_theme) {
                 continue;
             }
+//            echo $PMA_Theme;
 
             $new_theme->setId($PMA_Theme);
             $this->themes[$PMA_Theme] = $new_theme;
@@ -316,6 +318,8 @@ class ThemeManager
         closedir($handleThemes);
 
         ksort($this->themes);
+//        print_r($this->themes);
+//        debugger_print();
 
         return true;
     }

@@ -15,4 +15,6 @@ global $route, $containerBuilder;
 require_once ROOT_PATH . 'libraries/common.inc.php';
 
 $dispatcher = Routing::getDispatcher();
+
+//$route='/server/databases';
 Routing::callControllerForRoute($route, $dispatcher, $containerBuilder);

@@ -66,11 +66,11 @@ class __TwigTemplate_c690718f132ac5bcdf4849e07bdf6b055041c373019b53613e40e6bcf9d
                     // line 14
                     echo "              <img id=\"imgpmalogo\" src=\"";
                     echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, ($context["logo"] ?? null), "source", [], "any", false, false, false, 14), "html", null, true);
-                    echo "\" alt=\"phpMyAdmin\">
+                    echo "\" alt=\"KingnetMyAdmin\" style=\"width:80%;\">
             ";
                 } else {
                     // line 16
-                    echo "              <h1>phpMyAdmin</h1>
+                    echo "              <h1>KingnetMyAdmin</h1>
             ";
                 }
                 // line 18
@@ -115,17 +115,9 @@ class __TwigTemplate_c690718f132ac5bcdf4849e07bdf6b055041c373019b53613e40e6bcf9d
             }
             // line 34
             echo "
-          <a href=\"";
-            // line 35
-            echo \PhpMyAdmin\Html\MySQLDocumentation::getDocumentationLink("index");
-            echo "\" title=\"";
-            echo _gettext("phpMyAdmin documentation");
-            echo "\" target=\"_blank\" rel=\"noopener noreferrer\">";
-            // line 36
-            echo \PhpMyAdmin\Html\Generator::getImage("b_docs", _gettext("phpMyAdmin documentation"));
-            // line 37
-            echo "</a>
-
+";
+            // line 38
+            echo "
           <a href=\"";
             // line 39
             echo PhpMyAdmin\Util::getdocuURL(($context["is_mariadb"] ?? null));
@@ -267,7 +259,7 @@ class __TwigTemplate_c690718f132ac5bcdf4849e07bdf6b055041c373019b53613e40e6bcf9d
 
     public function getDebugInfo()
     {
-        return array (  253 => 96,  244 => 89,  242 => 88,  237 => 85,  235 => 84,  232 => 83,  230 => 82,  225 => 79,  219 => 77,  217 => 76,  212 => 73,  210 => 72,  207 => 71,  201 => 69,  195 => 67,  193 => 66,  190 => 65,  183 => 63,  179 => 61,  177 => 58,  174 => 57,  168 => 54,  165 => 53,  163 => 52,  158 => 49,  156 => 48,  153 => 47,  149 => 45,  147 => 44,  142 => 43,  138 => 41,  136 => 40,  131 => 39,  127 => 37,  125 => 36,  120 => 35,  117 => 34,  113 => 32,  111 => 31,  105 => 30,  103 => 29,  99 => 27,  97 => 26,  92 => 25,  88 => 23,  84 => 21,  80 => 19,  77 => 18,  73 => 16,  67 => 14,  64 => 13,  56 => 11,  54 => 10,  51 => 9,  49 => 8,  39 => 2,  37 => 1,);
+        return array (  245 => 96,  236 => 89,  234 => 88,  229 => 85,  227 => 84,  224 => 83,  222 => 82,  217 => 79,  211 => 77,  209 => 76,  204 => 73,  202 => 72,  199 => 71,  193 => 69,  187 => 67,  185 => 66,  182 => 65,  175 => 63,  171 => 61,  169 => 58,  166 => 57,  160 => 54,  157 => 53,  155 => 52,  150 => 49,  148 => 48,  145 => 47,  141 => 45,  139 => 44,  134 => 43,  130 => 41,  128 => 40,  123 => 39,  120 => 38,  117 => 34,  113 => 32,  111 => 31,  105 => 30,  103 => 29,  99 => 27,  97 => 26,  92 => 25,  88 => 23,  84 => 21,  80 => 19,  77 => 18,  73 => 16,  67 => 14,  64 => 13,  56 => 11,  54 => 10,  51 => 9,  49 => 8,  39 => 2,  37 => 1,);
     }
 
     public function getSourceContext()
