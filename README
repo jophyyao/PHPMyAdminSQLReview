@@ -1,3 +1,32 @@
+功能简介:
+  基于phpmyadmin5.1.1开发，增加表
+
+部署方法
+1.建库建表
+  运行sql/sql_history
+
+docker-compose file:
+--------------------------------------
+version: '3.3'
+services:
+phpmyadmin:
+image: phpmyadmin/phpmyadmin
+hostname: phpmyadmin
+ports:
+- 8800:80
+volumes:
+- /Users/yaozhijie/PhpstormProjects/phpmyadmin:/var/www/html
+environment:
+- PMA_HOSTS=172.20.3.27,172.16.32.91
+- PMA_VERBOSES=dev,prod
+- PMA_PORTS=3306,3306
+- LOG_DB_HOSTS=172.20.3.27
+- LOG_DB_USER=root
+- LOG_DB_PASSWORD=selina
+- LOG_DB_DATABASE=phpmyadmin_log
+- LOG_DB_PORT=3306
+---------------------------------
+
 
 ====================
 表SQL:

@@ -49,9 +49,9 @@ final class ReplaceController extends AbstractController
     private $dbi;
 
     /**
-     * @param Response          $response
-     * @param string            $db       Database name.
-     * @param string            $table    Table name.
+     * @param Response $response
+     * @param string $db Database name.
+     * @param string $table Table name.
      * @param DatabaseInterface $dbi
      */
     public function __construct(
@@ -63,7 +63,8 @@ final class ReplaceController extends AbstractController
         Transformations $transformations,
         Relation $relation,
         $dbi
-    ) {
+    )
+    {
         parent::__construct($response, $template, $db, $table);
         $this->insertEdit = $insertEdit;
         $this->transformations = $transformations;
@@ -200,7 +201,7 @@ final class ReplaceController extends AbstractController
         $unsaved_values = [];
         foreach ($loop_array as $rownumber => $where_clause) {
             // skip fields to be ignored
-            if (! $using_key && isset($_POST['insert_ignore_' . $where_clause])) {
+            if (!$using_key && isset($_POST['insert_ignore_' . $where_clause])) {
                 continue;
             }
 
@@ -249,15 +250,15 @@ final class ReplaceController extends AbstractController
                 // available in $multi_edit_columns_name[$key]
 
                 $file_to_insert = new File();
-                $file_to_insert->checkTblChangeForm((string) $key, (string) $rownumber);
+                $file_to_insert->checkTblChangeForm((string)$key, (string)$rownumber);
 
                 $possibly_uploaded_val = $file_to_insert->getContent();
                 if ($possibly_uploaded_val !== false) {
                     $current_value = $possibly_uploaded_val;
                 }
                 // Apply Input Transformation if defined
-                if (! empty($mime_map[$column_name])
-                    && ! empty($mime_map[$column_name]['input_transformation'])
+                if (!empty($mime_map[$column_name])
+                    && !empty($mime_map[$column_name]['input_transformation'])
                 ) {
                     $filename = 'libraries/classes/Plugins/Transformations/'
                         . $mime_map[$column_name]['input_transformation'];
@@ -276,7 +277,7 @@ final class ReplaceController extends AbstractController
                             // check if transformation was successful or not
                             // and accordingly set error messages & insert_fail
                             if (method_exists($transformation_plugin, 'isSuccess')
-                                && ! $transformation_plugin->isSuccess()
+                                && !$transformation_plugin->isSuccess()
                             ) {
                                 $insert_fail = true;
                                 $row_skipped = true;
@@ -325,7 +326,7 @@ final class ReplaceController extends AbstractController
                     $key
                 );
 
-                if (! isset($multi_edit_virtual, $multi_edit_virtual[$key])) {
+                if (!isset($multi_edit_virtual, $multi_edit_virtual[$key])) {
                     [
                         $query_values,
                         $query_fields,
@@ -344,7 +345,7 @@ final class ReplaceController extends AbstractController
                         $multi_edit_columns_null_prev
                     );
                 }
-                if (! isset($multi_edit_columns_null[$key])) {
+                if (!isset($multi_edit_columns_null[$key])) {
                     continue;
                 }
 
@@ -391,7 +392,7 @@ final class ReplaceController extends AbstractController
         // Builds the sql query
         if ($is_insert && count($value_sets) > 0) {
             $query = $this->insertEdit->buildSqlQuery($is_insertignore, $query_fields, $value_sets);
-        } elseif (empty($query) && ! isset($_POST['preview_sql']) && ! $row_skipped) {
+        } elseif (empty($query) && !isset($_POST['preview_sql']) && !$row_skipped) {
             // No change -> move back to the calling script
             //
             // Note: logic passes here for inline edit
@@ -434,7 +435,7 @@ final class ReplaceController extends AbstractController
                 return;
             }
 
-            include ROOT_PATH . Core::securePath((string) $goto_include);
+            include ROOT_PATH . Core::securePath((string)$goto_include);
 
             return;
         }
@@ -479,11 +480,11 @@ final class ReplaceController extends AbstractController
 
         $message->addMessages($last_messages, '<br>');
 
-        if (! empty($warning_messages)) {
+        if (!empty($warning_messages)) {
             $message->addMessagesString($warning_messages, '<br>');
             $message->isError(true);
         }
-        if (! empty($error_messages)) {
+        if (!empty($error_messages)) {
             $message->addMessagesString($error_messages);
             $message->isError(true);
         }
@@ -502,7 +503,7 @@ final class ReplaceController extends AbstractController
          * grid editing. If we are coming from the Edit or Copy link in Browse mode,
          * ajax_page_request is present in the POST parameters.
          */
-        if ($this->response->isAjax() && ! isset($_POST['ajax_page_request'])) {
+        if ($this->response->isAjax() && !isset($_POST['ajax_page_request'])) {
             // jophy
             $sh = new SqlHistory($this->dbi);
             $sh->common_save($_POST, $cfg['Server'], $GLOBALS['sql_query'], "replace");
@@ -544,7 +545,7 @@ final class ReplaceController extends AbstractController
                 $edited_values = [];
                 parse_str($_POST['transform_fields_list'], $edited_values);
 
-                if (! isset($extra_data)) {
+                if (!isset($extra_data)) {
                     $extra_data = [];
                 }
                 $transformation_types = [
@@ -596,7 +597,7 @@ final class ReplaceController extends AbstractController
             return;
         }
 
-        if (! empty($return_to_sql_query)) {
+        if (!empty($return_to_sql_query)) {
             $disp_query = $GLOBALS['sql_query'];
             $disp_message = $message;
             unset($message);
@@ -660,6 +661,6 @@ final class ReplaceController extends AbstractController
         /**
          * Load target page.
          */
-        require ROOT_PATH . Core::securePath((string) $goto_include);
+        require ROOT_PATH . Core::securePath((string)$goto_include);
     }
 }
