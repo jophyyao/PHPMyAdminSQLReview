@@ -66,7 +66,7 @@ class __TwigTemplate_c690718f132ac5bcdf4849e07bdf6b055041c373019b53613e40e6bcf9d
                     // line 14
                     echo "              <img id=\"imgpmalogo\" src=\"";
                     echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, ($context["logo"] ?? null), "source", [], "any", false, false, false, 14), "html", null, true);
-                    echo "\" alt=\"KingnetMyAdmin\" style=\"width:80%;\">
+                    echo "\" alt=\"PhpMyAdmin\" style=\"width:80%;\">
             ";
                 } else {
                     // line 16

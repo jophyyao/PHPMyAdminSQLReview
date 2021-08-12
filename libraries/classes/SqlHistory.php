@@ -73,6 +73,7 @@ class SqlHistory
 
     public function common_save($post, $cfg_server, $sql_query, $source_type): bool
     {
+        echo $sql_query;
         if (preg_match('/^(insert|update|delete|truncate|alter|rename|create|drop|replace)/im', $this->dbi->escapeString($sql_query))) {
             if (empty($post['db'])) $post['db'] = '';
             if (empty($post['table'])) $post['table'] = '';

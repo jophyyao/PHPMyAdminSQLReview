@@ -49,11 +49,11 @@ class __TwigTemplate_9b4f5b2b32ae780681262d24a8a67c7cebd2906325aab14fdd504724d82
 <img src=\"";
         // line 8
         echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, ($context["theme"] ?? null), "getImgPath", [0 => "logo_right.png", 1 => "pma_logo.png"], "method", false, false, false, 8), "html", null, true);
-        echo "\" id=\"imLogo\" name=\"imLogo\" alt=\"KingnetMyAdmin\" border=\"0\" style=\"width:172px;height:150px;\">
+        echo "\" id=\"imLogo\" name=\"imLogo\" alt=\"PhpMyAdmin\" border=\"0\" style=\"width:172px;height:150px;\">
 </a>
 <h1>";
         // line 10
-        echo sprintf(_gettext("Welcome to %s"), "<bdo dir=\"ltr\" lang=\"en\">KingnetMyAdmin</bdo>");
+        echo sprintf(_gettext("Welcome to %s"), "<bdo dir=\"ltr\" lang=\"en\">PhpMyAdmin</bdo>");
         echo "</h1>
 
 <noscript>

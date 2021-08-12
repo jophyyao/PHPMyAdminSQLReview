@@ -82,9 +82,9 @@ class __TwigTemplate_801b0bac6a91b6b8865692ae34f1c677a01913850624bfc28dff7255439
                 echo _gettext("You are using the demo server. You can do anything here, but please do not change root, debian-sys-maint and pma users. More information is available at %s.");
                 // line 25
                 echo "                ";
-                $___internal_2726e29848b22c1f2d9cbd47d04eaaa52c5c30a66b2d73636128a3caf00c490d_ = ('' === $tmp = ob_get_clean()) ? '' : new Markup($tmp, $this->env->getCharset());
+                $___internal_33a16c136f73e54ef59f29ea95bca39d34eb76a2567bbffef621b28b0393a7c2_ = ('' === $tmp = ob_get_clean()) ? '' : new Markup($tmp, $this->env->getCharset());
                 // line 21
-                echo sprintf($___internal_2726e29848b22c1f2d9cbd47d04eaaa52c5c30a66b2d73636128a3caf00c490d_, "<a href=\"url.php?url=https://demo.phpmyadmin.net/\" target=\"_blank\" rel=\"noopener noreferrer\">demo.phpmyadmin.net</a>");
+                echo sprintf($___internal_33a16c136f73e54ef59f29ea95bca39d34eb76a2567bbffef621b28b0393a7c2_, "<a href=\"url.php?url=https://demo.phpmyadmin.net/\" target=\"_blank\" rel=\"noopener noreferrer\">demo.phpmyadmin.net</a>");
                 // line 26
                 echo "              </div>
             </div>
@@ -485,73 +485,9 @@ class __TwigTemplate_801b0bac6a91b6b8865692ae34f1c677a01913850624bfc28dff7255439
         echo twig_escape_filter($this->env, ($context["phpmyadmin_version"] ?? null), "html", null, true);
         echo "</span>
               </li>
-              <li class=\"list-group-item\">
-                <a href=\"";
-        // line 199
-        echo \PhpMyAdmin\Html\MySQLDocumentation::getDocumentationLink("index");
-        echo "\" target=\"_blank\" rel=\"noopener noreferrer\">
-                  ";
-        // line 200
-        echo _gettext("Documentation");
-        // line 201
-        echo "                </a>
-              </li>
-              <li class=\"list-group-item\">
-                <a href=\"";
-        // line 204
-        echo twig_escape_filter($this->env, PhpMyAdmin\Core::linkURL("https://www.phpmyadmin.net/"), "html", null, true);
-        echo "\" target=\"_blank\" rel=\"noopener noreferrer\">
-                  ";
-        // line 205
-        echo _gettext("Official Homepage");
-        // line 206
-        echo "                </a>
-              </li>
-              <li class=\"list-group-item\">
-                <a href=\"";
-        // line 209
-        echo twig_escape_filter($this->env, PhpMyAdmin\Core::linkURL("https://www.phpmyadmin.net/contribute/"), "html", null, true);
-        echo "\" target=\"_blank\" rel=\"noopener noreferrer\">
-                  ";
-        // line 210
-        echo _gettext("Contribute");
-        // line 211
-        echo "                </a>
-              </li>
-              <li class=\"list-group-item\">
-                <a href=\"";
-        // line 214
-        echo twig_escape_filter($this->env, PhpMyAdmin\Core::linkURL("https://www.phpmyadmin.net/support/"), "html", null, true);
-        echo "\" target=\"_blank\" rel=\"noopener noreferrer\">
-                  ";
-        // line 215
-        echo _gettext("Get support");
-        // line 216
-        echo "                </a>
-              </li>
-              <li class=\"list-group-item\">
-                <a href=\"";
-        // line 219
-        echo PhpMyAdmin\Url::getFromRoute("/changelog");
-        echo "\" target=\"_blank\">
-                  ";
-        // line 220
-        echo _gettext("List of changes");
-        // line 221
-        echo "                </a>
-              </li>
-              <li class=\"list-group-item\">
-                <a href=\"";
-        // line 224
-        echo PhpMyAdmin\Url::getFromRoute("/license");
-        echo "\" target=\"_blank\">
-                  ";
-        // line 225
-        echo _gettext("License");
-        // line 226
-        echo "                </a>
-              </li>
-            </ul>
+";
+        // line 228
+        echo "            </ul>
           </div>
         </div>
       </div>
@@ -577,7 +513,7 @@ class __TwigTemplate_801b0bac6a91b6b8865692ae34f1c677a01913850624bfc28dff7255439
 
     public function getDebugInfo()
     {
-        return array (  563 => 235,  552 => 226,  550 => 225,  546 => 224,  541 => 221,  539 => 220,  535 => 219,  530 => 216,  528 => 215,  524 => 214,  519 => 211,  517 => 210,  513 => 209,  508 => 206,  506 => 205,  502 => 204,  497 => 201,  495 => 200,  491 => 199,  484 => 196,  482 => 195,  478 => 194,  470 => 188,  465 => 185,  460 => 182,  458 => 181,  454 => 180,  451 => 179,  448 => 178,  441 => 175,  439 => 174,  435 => 172,  427 => 170,  422 => 169,  417 => 168,  415 => 167,  408 => 164,  406 => 163,  403 => 162,  397 => 159,  394 => 158,  391 => 157,  389 => 156,  385 => 154,  383 => 153,  379 => 151,  377 => 150,  374 => 149,  365 => 143,  362 => 142,  360 => 141,  353 => 138,  351 => 137,  344 => 134,  342 => 133,  335 => 130,  333 => 129,  326 => 126,  324 => 125,  317 => 122,  315 => 121,  308 => 118,  306 => 117,  301 => 114,  299 => 113,  295 => 111,  293 => 110,  286 => 105,  280 => 102,  276 => 101,  273 => 100,  271 => 99,  268 => 98,  262 => 95,  258 => 94,  255 => 93,  253 => 92,  249 => 90,  247 => 89,  242 => 86,  237 => 83,  230 => 79,  226 => 78,  220 => 74,  216 => 72,  209 => 70,  202 => 68,  200 => 67,  192 => 66,  188 => 65,  181 => 64,  177 => 63,  172 => 61,  169 => 60,  167 => 59,  161 => 57,  159 => 56,  155 => 55,  150 => 53,  146 => 52,  142 => 50,  135 => 46,  131 => 45,  128 => 44,  125 => 43,  123 => 42,  120 => 41,  114 => 38,  110 => 37,  107 => 36,  105 => 35,  101 => 33,  99 => 32,  94 => 29,  89 => 26,  87 => 21,  84 => 25,  81 => 22,  79 => 21,  75 => 19,  73 => 18,  69 => 16,  66 => 15,  64 => 14,  57 => 10,  51 => 7,  46 => 5,  43 => 4,  39 => 2,  37 => 1,);
+        return array (  499 => 235,  490 => 228,  484 => 196,  482 => 195,  478 => 194,  470 => 188,  465 => 185,  460 => 182,  458 => 181,  454 => 180,  451 => 179,  448 => 178,  441 => 175,  439 => 174,  435 => 172,  427 => 170,  422 => 169,  417 => 168,  415 => 167,  408 => 164,  406 => 163,  403 => 162,  397 => 159,  394 => 158,  391 => 157,  389 => 156,  385 => 154,  383 => 153,  379 => 151,  377 => 150,  374 => 149,  365 => 143,  362 => 142,  360 => 141,  353 => 138,  351 => 137,  344 => 134,  342 => 133,  335 => 130,  333 => 129,  326 => 126,  324 => 125,  317 => 122,  315 => 121,  308 => 118,  306 => 117,  301 => 114,  299 => 113,  295 => 111,  293 => 110,  286 => 105,  280 => 102,  276 => 101,  273 => 100,  271 => 99,  268 => 98,  262 => 95,  258 => 94,  255 => 93,  253 => 92,  249 => 90,  247 => 89,  242 => 86,  237 => 83,  230 => 79,  226 => 78,  220 => 74,  216 => 72,  209 => 70,  202 => 68,  200 => 67,  192 => 66,  188 => 65,  181 => 64,  177 => 63,  172 => 61,  169 => 60,  167 => 59,  161 => 57,  159 => 56,  155 => 55,  150 => 53,  146 => 52,  142 => 50,  135 => 46,  131 => 45,  128 => 44,  125 => 43,  123 => 42,  120 => 41,  114 => 38,  110 => 37,  107 => 36,  105 => 35,  101 => 33,  99 => 32,  94 => 29,  89 => 26,  87 => 21,  84 => 25,  81 => 22,  79 => 21,  75 => 19,  73 => 18,  69 => 16,  66 => 15,  64 => 14,  57 => 10,  51 => 7,  46 => 5,  43 => 4,  39 => 2,  37 => 1,);
     }
 
     public function getSourceContext()

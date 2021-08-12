@@ -647,8 +647,10 @@ final class ReplaceController extends AbstractController
 
         if ($goto_include === '/table/sql') {
             // jophy
+            $sql_query = $disp_query;
+            if (empty($sql_query)) $sql_query = $GLOBALS['sql_query'];
             $sh = new SqlHistory($this->dbi);
-            $sh->common_save($_POST, $cfg['Server'], $GLOBALS['sql_query'], "insert");
+            $sh->common_save($_POST, $cfg['Server'], $sql_query, "insert");
             /** @var TableSqlController $controller */
             $controller = $containerBuilder->get(TableSqlController::class);
             $controller->index();
