@@ -839,7 +839,7 @@ $cfg['IgnoreMultiSubmitErrors'] = false;
  *
  * @global boolean $cfg['AllowArbitraryServer']
  */
-$cfg['AllowArbitraryServer'] = false;
+$cfg['AllowArbitraryServer'] = true;
 
 /**
  * restrict by IP (with regular expression) the MySQL servers the user can enter
