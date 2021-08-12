@@ -53,7 +53,9 @@ class SqlHistory
             $this->db_name = $post['db'];
             $this->table = $post['table'];
             $this->db_user = $cfg_server['user'];
-            $this->client_ip = $cfg_server['host'];
+            $port = '';
+            if (!empty($cfg_server['port'])) $port=':'.$cfg_server['port'];
+            $this->client_ip = $cfg_server['host'].$port;
             $this->source_type = "sql";
             $this->sql_save_submit();
             return true;
@@ -62,7 +64,9 @@ class SqlHistory
             $this->db_name = $post['db'];
             $this->table = "pma__bookmark";
             $this->db_user = $cfg_server['user'];
-            $this->client_ip = $cfg_server['host'];
+            $port = '';
+            if (!empty($cfg_server['port'])) $port=':'.$cfg_server['port'];
+            $this->client_ip = $cfg_server['host'].$port;
             $this->source_type = "bookmark";
             $this->sql_save_submit();
             return true;
@@ -73,7 +77,6 @@ class SqlHistory
 
     public function common_save($post, $cfg_server, $sql_query, $source_type): bool
     {
-        echo $sql_query;
         if (preg_match('/^(insert|update|delete|truncate|alter|rename|create|drop|replace)/im', $this->dbi->escapeString($sql_query))) {
             if (empty($post['db'])) $post['db'] = '';
             if (empty($post['table'])) $post['table'] = '';
@@ -81,7 +84,9 @@ class SqlHistory
             $this->db_name = $post['db'];
             $this->table = $post['table'];
             $this->db_user = $cfg_server['user'];
-            $this->client_ip = $cfg_server['host'];
+            $port = '';
+            if (!empty($cfg_server['port'])) $port=':'.$cfg_server['port'];
+            $this->client_ip = $cfg_server['host'].$port;
             $this->source_type = $source_type;
             $this->sql_save_submit();
             return true;
@@ -102,7 +107,9 @@ class SqlHistory
         $this->db_name = $post['db'];
         $this->table = $post['table'];
         $this->db_user = $cfg_server['user'];
-        $this->client_ip = $cfg_server['host'];
+        $port = '';
+        if (!empty($cfg_server['port'])) $port=':'.$cfg_server['port'];
+        $this->client_ip = $cfg_server['host'].$port;
         $this->source_type = $source_type;
         $this->sql_save_submit();
         return true;
