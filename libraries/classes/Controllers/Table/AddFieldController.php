@@ -73,7 +73,7 @@ class AddFieldController extends AbstractController
         // Check parameters
         Util::checkParameters(['db', 'table']);
 
-        $cfg = $this->config->settings;
+//        $cfg = $this->config->settings;
 
         /**
          * Defines the url to return to in case of error in a sql statement
@@ -125,6 +125,7 @@ class AddFieldController extends AbstractController
                 return;
             }
 
+
             // Update comment table for mime types [MIME]
             if (isset($_POST['field_mimetype'])
                 && is_array($_POST['field_mimetype'])
@@ -151,6 +152,7 @@ class AddFieldController extends AbstractController
             }
 
 
+
             // Go back to the structure sub-page
             $message = Message::success(
                 __('Table %1$s has been altered successfully.')
@@ -160,6 +162,7 @@ class AddFieldController extends AbstractController
                 'message',
                 Generator::getMessage($message, $sql_query, 'success')
             );
+
 
             // jophy
             $sh = new SqlHistory($this->dbi);
