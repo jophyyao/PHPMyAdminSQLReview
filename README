@@ -82,6 +82,12 @@ environment:
     3.实例导入 (server import)
 首页
   审计内容
-    1.创建数据库 
+    1.创建数据库
+
+==============================
+v1.4.3
+  修复添加字段获取不到server ip的问题
+v1.4.4
+  增加login页HTTP GET参数填入host和user
 
 

@@ -37,7 +37,8 @@
           {% trans 'Server:' %}
         </label>
         <div class="col-8">
-        <input type="text" name="pma_servername" id="input_servername" value="{{ default_server }}" size="24" class="textfield" title="
+{#        <input type="text" name="pma_servername" id="input_servername" value="{{ default_server }}" size="24" class="textfield" title="#}
+        <input type="text" name="pma_servername" id="input_servername" value="{{ host }}" size="24" class="textfield" title="
           {%- trans 'You can enter hostname/IP address and port separated by space.' %}">
         </div>
       </div>
@@ -48,7 +49,8 @@
         {% trans 'Username:' %}
       </label>
       <div class="col-8">
-        <input type="text" name="pma_username" id="input_username" value="{{ default_user }}" size="24" class="textfield" autocomplete="username">
+{#        <input type="text" name="pma_username" id="input_username" value="{{ default_user }}" size="24" class="textfield" autocomplete="username">#}
+        <input type="text" name="pma_username" id="input_username" value="{{ user }}" size="24" class="textfield" autocomplete="username">
       </div>
     </div>
 

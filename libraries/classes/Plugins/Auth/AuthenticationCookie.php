@@ -248,6 +248,8 @@ class AuthenticationCookie extends AuthenticationPlugin
             'errors' => $errors,
             'login_footer' => $loginFooter,
             'config_footer' => $configFooter,
+            'host' => $_GET['host'],
+            'user' => $_GET['user'],
         ]);
 
         if (! defined('TESTSUITE')) {

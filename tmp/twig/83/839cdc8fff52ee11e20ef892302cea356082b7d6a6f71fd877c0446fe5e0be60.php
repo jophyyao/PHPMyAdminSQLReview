@@ -54,9 +54,9 @@ class __TwigTemplate_305b1cf79147ceb7659666f3f042c18f2085106dabf9edd60604c4c8188
             echo _gettext("You are using the demo server. You can do anything here, but please do not change root, debian-sys-maint and pma users. More information is available at %s.");
             // line 10
             echo "    ";
-            $___internal_56727a0cf8ae5f274bd1c1a2e97b5a7aa316290c1d6ef538ac6d72b664e5eda5_ = ('' === $tmp = ob_get_clean()) ? '' : new Markup($tmp, $this->env->getCharset());
+            $___internal_e6bd3700d584558193baee23aa322588c81e9047a72e34ddf330db94ae04efc8_ = ('' === $tmp = ob_get_clean()) ? '' : new Markup($tmp, $this->env->getCharset());
             // line 6
-            echo sprintf($___internal_56727a0cf8ae5f274bd1c1a2e97b5a7aa316290c1d6ef538ac6d72b664e5eda5_, "<a href=\"url.php?url=https://demo.phpmyadmin.net/\" target=\"_blank\" rel=\"noopener noreferrer\">demo.phpmyadmin.net</a>");
+            echo sprintf($___internal_e6bd3700d584558193baee23aa322588c81e9047a72e34ddf330db94ae04efc8_, "<a href=\"url.php?url=https://demo.phpmyadmin.net/\" target=\"_blank\" rel=\"noopener noreferrer\">demo.phpmyadmin.net</a>");
             // line 11
             echo "  </fieldset>
 ";
@@ -125,30 +125,32 @@ class __TwigTemplate_305b1cf79147ceb7659666f3f042c18f2085106dabf9edd60604c4c8188
             // line 38
             echo "        </label>
         <div class=\"col-8\">
-        <input type=\"text\" name=\"pma_servername\" id=\"input_servername\" value=\"";
-            // line 40
-            echo twig_escape_filter($this->env, ($context["default_server"] ?? null), "html", null, true);
-            echo "\" size=\"24\" class=\"textfield\" title=\"";
+";
             // line 41
+            echo "        <input type=\"text\" name=\"pma_servername\" id=\"input_servername\" value=\"";
+            echo twig_escape_filter($this->env, ($context["host"] ?? null), "html", null, true);
+            echo "\" size=\"24\" class=\"textfield\" title=\"";
+            // line 42
             echo _gettext("You can enter hostname/IP address and port separated by space.");
             echo "\">
         </div>
       </div>
     ";
         }
-        // line 45
+        // line 46
         echo "
     <div class=\"item form-row\">
       <label for=\"input_username\" class=\"col-4 d-flex align-items-center\">
         ";
-        // line 48
-        echo _gettext("Username:");
         // line 49
+        echo _gettext("Username:");
+        // line 50
         echo "      </label>
       <div class=\"col-8\">
-        <input type=\"text\" name=\"pma_username\" id=\"input_username\" value=\"";
-        // line 51
-        echo twig_escape_filter($this->env, ($context["default_user"] ?? null), "html", null, true);
+";
+        // line 53
+        echo "        <input type=\"text\" name=\"pma_username\" id=\"input_username\" value=\"";
+        echo twig_escape_filter($this->env, ($context["user"] ?? null), "html", null, true);
         echo "\" size=\"24\" class=\"textfield\" autocomplete=\"username\">
       </div>
     </div>
@@ -156,9 +158,9 @@ class __TwigTemplate_305b1cf79147ceb7659666f3f042c18f2085106dabf9edd60604c4c8188
     <div class=\"item form-row\">
       <label for=\"input_password\" class=\"col-4 d-flex align-items-center\">
         ";
-        // line 57
+        // line 59
         echo _gettext("Password:");
-        // line 58
+        // line 60
         echo "      </label>
       <div class=\"col-8\">
         <input type=\"password\" name=\"pma_password\" id=\"input_password\" value=\"\" size=\"24\" class=\"textfield\" autocomplete=\"current-password\">
@@ -166,23 +168,23 @@ class __TwigTemplate_305b1cf79147ceb7659666f3f042c18f2085106dabf9edd60604c4c8188
     </div>
 
     ";
-        // line 64
+        // line 66
         if (($context["has_servers"] ?? null)) {
-            // line 65
+            // line 67
             echo "      <div class=\"item form-row\">
         <label for=\"select_server\" class=\"col-4 d-flex align-items-center\">
           ";
-            // line 67
+            // line 69
             echo _gettext("Server choice:");
-            // line 68
+            // line 70
             echo "        </label>
         <div class=\"col-8\">
           <select name=\"server\" id=\"select_server\"";
-            // line 70
+            // line 72
             echo ((($context["is_arbitrary_server_allowed"] ?? null)) ? (" onchange=\"document.forms['login_form'].elements['pma_servername'].value = ''\"") : (""));
             echo ">
             ";
-            // line 71
+            // line 73
             echo ($context["server_options"] ?? null);
             echo "
           </select>
@@ -190,41 +192,41 @@ class __TwigTemplate_305b1cf79147ceb7659666f3f042c18f2085106dabf9edd60604c4c8188
       </div>
     ";
         } else {
-            // line 76
+            // line 78
             echo "      <input type=\"hidden\" name=\"server\" value=\"";
             echo twig_escape_filter($this->env, ($context["server"] ?? null), "html", null, true);
             echo "\">
     ";
         }
-        // line 78
+        // line 80
         echo "  </fieldset>
 
   <fieldset class=\"tblFooters\">
     ";
-        // line 81
+        // line 83
         if (($context["has_captcha"] ?? null)) {
-            // line 82
+            // line 84
             echo "      <script src=\"";
             echo twig_escape_filter($this->env, ($context["captcha_api"] ?? null), "html", null, true);
             echo "?hl=";
             echo twig_escape_filter($this->env, ($context["lang"] ?? null), "html", null, true);
             echo "\" async defer></script>
       ";
-            // line 83
+            // line 85
             if (($context["use_captcha_checkbox"] ?? null)) {
-                // line 84
+                // line 86
                 echo "      <div class=\"";
                 echo twig_escape_filter($this->env, ($context["captcha_req"] ?? null), "html", null, true);
                 echo "\" data-sitekey=\"";
                 echo twig_escape_filter($this->env, ($context["captcha_key"] ?? null), "html", null, true);
                 echo "\"></div>
       <input class=\"btn btn-primary\" value=\"";
-                // line 85
+                // line 87
                 echo _gettext("Go");
                 echo "\" type=\"submit\" id=\"input_go\">
       ";
             } else {
-                // line 87
+                // line 89
                 echo "      <input class=\"btn btn-primary ";
                 echo twig_escape_filter($this->env, ($context["captcha_req"] ?? null), "html", null, true);
                 echo "\" data-sitekey=\"";
@@ -234,18 +236,18 @@ class __TwigTemplate_305b1cf79147ceb7659666f3f042c18f2085106dabf9edd60604c4c8188
                 echo "\" type=\"submit\" id=\"input_go\">
       ";
             }
-            // line 89
+            // line 91
             echo "    ";
         } else {
-            // line 90
+            // line 92
             echo "      <input class=\"btn btn-primary\" value=\"";
             echo _gettext("Go");
             echo "\" type=\"submit\" id=\"input_go\">
     ";
         }
-        // line 92
+        // line 94
         echo "    ";
-        // line 93
+        // line 95
         echo "    ";
         echo PhpMyAdmin\Url::getHiddenInputs(($context["form_params"] ?? null), "", 0, "server");
         echo "
@@ -253,12 +255,12 @@ class __TwigTemplate_305b1cf79147ceb7659666f3f042c18f2085106dabf9edd60604c4c8188
 </form>
 
 ";
-        // line 97
+        // line 99
         if ( !twig_test_empty(($context["errors"] ?? null))) {
-            // line 98
+            // line 100
             echo "  <div id=\"pma_errors\">
     ";
-            // line 99
+            // line 101
             echo ($context["errors"] ?? null);
             echo "
   </div>
@@ -266,15 +268,15 @@ class __TwigTemplate_305b1cf79147ceb7659666f3f042c18f2085106dabf9edd60604c4c8188
   </div>
 ";
         }
-        // line 104
+        // line 106
         echo "
 ";
-        // line 105
+        // line 107
         echo ($context["login_footer"] ?? null);
         echo "
 
 ";
-        // line 107
+        // line 109
         echo ($context["config_footer"] ?? null);
         echo "
 ";
@@ -292,7 +294,7 @@ class __TwigTemplate_305b1cf79147ceb7659666f3f042c18f2085106dabf9edd60604c4c8188
 
     public function getDebugInfo()
     {
-        return array (  278 => 107,  273 => 105,  270 => 104,  262 => 99,  259 => 98,  257 => 97,  249 => 93,  247 => 92,  241 => 90,  238 => 89,  228 => 87,  223 => 85,  216 => 84,  214 => 83,  207 => 82,  205 => 81,  200 => 78,  194 => 76,  186 => 71,  182 => 70,  178 => 68,  176 => 67,  172 => 65,  170 => 64,  162 => 58,  160 => 57,  151 => 51,  147 => 49,  145 => 48,  140 => 45,  133 => 41,  130 => 40,  126 => 38,  124 => 37,  120 => 36,  117 => 35,  115 => 34,  108 => 31,  105 => 30,  101 => 28,  99 => 27,  95 => 26,  87 => 23,  84 => 21,  78 => 18,  75 => 17,  73 => 16,  68 => 14,  65 => 13,  61 => 11,  59 => 6,  56 => 10,  53 => 7,  51 => 6,  47 => 5,  44 => 4,  42 => 3,  37 => 1,);
+        return array (  280 => 109,  275 => 107,  272 => 106,  264 => 101,  261 => 100,  259 => 99,  251 => 95,  249 => 94,  243 => 92,  240 => 91,  230 => 89,  225 => 87,  218 => 86,  216 => 85,  209 => 84,  207 => 83,  202 => 80,  196 => 78,  188 => 73,  184 => 72,  180 => 70,  178 => 69,  174 => 67,  172 => 66,  164 => 60,  162 => 59,  152 => 53,  148 => 50,  146 => 49,  141 => 46,  134 => 42,  130 => 41,  126 => 38,  124 => 37,  120 => 36,  117 => 35,  115 => 34,  108 => 31,  105 => 30,  101 => 28,  99 => 27,  95 => 26,  87 => 23,  84 => 21,  78 => 18,  75 => 17,  73 => 16,  68 => 14,  65 => 13,  61 => 11,  59 => 6,  56 => 10,  53 => 7,  51 => 6,  47 => 5,  44 => 4,  42 => 3,  37 => 1,);
     }
 
     public function getSourceContext()
