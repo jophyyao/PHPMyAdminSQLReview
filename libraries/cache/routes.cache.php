@@ -168,7 +168,7 @@
         0 => 'PhpMyAdmin\\Controllers\\LintController',
         1 => 'index',
       ),
-      '/logout' => 
+      '/loginout' =>
       array (
         0 => 'PhpMyAdmin\\Controllers\\LogoutController',
         1 => 'index',
@@ -771,7 +771,7 @@
         0 => 'PhpMyAdmin\\Controllers\\LintController',
         1 => 'index',
       ),
-      '/logout' => 
+      '/loginout' =>
       array (
         0 => 'PhpMyAdmin\\Controllers\\LogoutController',
         1 => 'index',

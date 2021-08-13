@@ -17,7 +17,7 @@ class LogoutController
 
             return;
         }
-
+//
         $auth_plugin->logOut();
     }
 }
