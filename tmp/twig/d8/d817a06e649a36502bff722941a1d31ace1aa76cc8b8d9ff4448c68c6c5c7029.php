@@ -98,141 +98,142 @@ class __TwigTemplate_c690718f132ac5bcdf4849e07bdf6b055041c373019b53613e40e6bcf9d
             // line 27
             echo "</a>
 
+          <!-- jophy logout -->
           ";
-            // line 29
+            // line 30
             if ((($context["server"] ?? null) != 0)) {
-                // line 30
+                // line 31
                 echo "            <a class=\"logout disableAjax\" href=\"";
                 echo PhpMyAdmin\Url::getFromRoute("/logout");
                 echo "\" title=\"";
                 echo twig_escape_filter($this->env, (((($context["auth_type"] ?? null) == "config")) ? (_gettext("Empty session data")) : (_gettext("Log out"))), "html", null, true);
                 echo "\">";
-                // line 31
-                echo \PhpMyAdmin\Html\Generator::getImage("s_loggoff", (((($context["auth_type"] ?? null) == "config")) ? (_gettext("Empty session data")) : (_gettext("Log out"))));
                 // line 32
+                echo \PhpMyAdmin\Html\Generator::getImage("s_loggoff", (((($context["auth_type"] ?? null) == "config")) ? (_gettext("Empty session data")) : (_gettext("Log out"))));
+                // line 33
                 echo "</a>
           ";
             }
-            // line 34
+            // line 35
             echo "
 ";
-            // line 38
+            // line 39
             echo "
           <a href=\"";
-            // line 39
+            // line 40
             echo PhpMyAdmin\Util::getdocuURL(($context["is_mariadb"] ?? null));
             echo "\" title=\"";
             echo twig_escape_filter($this->env, ((($context["is_mariadb"] ?? null)) ? (_gettext("MariaDB Documentation")) : (_gettext("MySQL Documentation"))), "html", null, true);
             echo "\" target=\"_blank\" rel=\"noopener noreferrer\">";
-            // line 40
-            echo \PhpMyAdmin\Html\Generator::getImage("b_sqlhelp", ((($context["is_mariadb"] ?? null)) ? (_gettext("MariaDB Documentation")) : (_gettext("MySQL Documentation"))));
             // line 41
+            echo \PhpMyAdmin\Html\Generator::getImage("b_sqlhelp", ((($context["is_mariadb"] ?? null)) ? (_gettext("MariaDB Documentation")) : (_gettext("MySQL Documentation"))));
+            // line 42
             echo "</a>
 
           <a id=\"pma_navigation_settings_icon\"";
-            // line 43
+            // line 44
             echo (( !($context["is_navigation_settings_enabled"] ?? null)) ? (" class=\"hide\"") : (""));
             echo " href=\"#\" title=\"";
             echo _gettext("Navigation panel settings");
             echo "\">";
-            // line 44
-            echo \PhpMyAdmin\Html\Generator::getImage("s_cog", _gettext("Navigation panel settings"));
             // line 45
+            echo \PhpMyAdmin\Html\Generator::getImage("s_cog", _gettext("Navigation panel settings"));
+            // line 46
             echo "</a>
 
           <a id=\"pma_navigation_reload\" href=\"#\" title=\"";
-            // line 47
+            // line 48
             echo _gettext("Reload navigation panel");
             echo "\">";
-            // line 48
-            echo \PhpMyAdmin\Html\Generator::getImage("s_reload", _gettext("Reload navigation panel"));
             // line 49
+            echo \PhpMyAdmin\Html\Generator::getImage("s_reload", _gettext("Reload navigation panel"));
+            // line 50
             echo "</a>
         </div>
 
         ";
-            // line 52
+            // line 53
             if ((($context["is_servers_displayed"] ?? null) && (twig_length_filter($this->env, ($context["servers"] ?? null)) > 1))) {
-                // line 53
+                // line 54
                 echo "          <div id=\"serverChoice\">
             ";
-                // line 54
+                // line 55
                 echo ($context["server_select"] ?? null);
                 echo "
           </div>
         ";
             }
-            // line 57
+            // line 58
             echo "
         ";
-            // line 58
+            // line 59
             echo \PhpMyAdmin\Html\Generator::getImage("ajax_clock_small", _gettext("Loading…"), ["style" => "visibility: hidden; display:none", "class" => "throbber"]);
-            // line 61
+            // line 62
             echo "
       </div>
       <div id=\"pma_navigation_tree\" class=\"list_container";
-            // line 63
+            // line 64
             echo ((($context["is_synced"] ?? null)) ? (" synced") : (""));
             echo ((($context["is_highlighted"] ?? null)) ? (" highlight") : (""));
             echo ((($context["is_autoexpanded"] ?? null)) ? (" autoexpand") : (""));
             echo "\">
 ";
         }
-        // line 65
+        // line 66
         echo "
 ";
-        // line 66
+        // line 67
         if ( !($context["navigation_tree"] ?? null)) {
-            // line 67
+            // line 68
             echo "  ";
             echo call_user_func_array($this->env->getFilter('error')->getCallable(), [_gettext("An error has occurred while loading the navigation display")]);
             echo "
 ";
         } else {
-            // line 69
+            // line 70
             echo "  ";
             echo ($context["navigation_tree"] ?? null);
             echo "
 ";
         }
-        // line 71
+        // line 72
         echo "
 ";
-        // line 72
+        // line 73
         if ( !($context["is_ajax"] ?? null)) {
-            // line 73
+            // line 74
             echo "      </div>
 
       <div id=\"pma_navi_settings_container\">
         ";
-            // line 76
+            // line 77
             if (($context["is_navigation_settings_enabled"] ?? null)) {
-                // line 77
+                // line 78
                 echo "          ";
                 echo ($context["navigation_settings"] ?? null);
                 echo "
         ";
             }
-            // line 79
+            // line 80
             echo "      </div>
     </div>
 
     ";
-            // line 82
+            // line 83
             if (($context["is_drag_drop_import_enabled"] ?? null)) {
-                // line 83
+                // line 84
                 echo "      <div class=\"pma_drop_handler\">
         ";
-                // line 84
-                echo _gettext("Drop files here");
                 // line 85
+                echo _gettext("Drop files here");
+                // line 86
                 echo "      </div>
       <div class=\"pma_sql_import_status\">
         <h2>
           ";
-                // line 88
-                echo _gettext("SQL upload");
                 // line 89
+                echo _gettext("SQL upload");
+                // line 90
                 echo "          ( <span class=\"pma_import_count\">0</span> )
           <span class=\"close\">x</span>
           <span class=\"minimize\">-</span>
@@ -241,7 +242,7 @@ class __TwigTemplate_c690718f132ac5bcdf4849e07bdf6b055041c373019b53613e40e6bcf9d
       </div>
     ";
             }
-            // line 96
+            // line 97
             echo "  </div>
 ";
         }
@@ -259,7 +260,7 @@ class __TwigTemplate_c690718f132ac5bcdf4849e07bdf6b055041c373019b53613e40e6bcf9d
 
     public function getDebugInfo()
     {
-        return array (  245 => 96,  236 => 89,  234 => 88,  229 => 85,  227 => 84,  224 => 83,  222 => 82,  217 => 79,  211 => 77,  209 => 76,  204 => 73,  202 => 72,  199 => 71,  193 => 69,  187 => 67,  185 => 66,  182 => 65,  175 => 63,  171 => 61,  169 => 58,  166 => 57,  160 => 54,  157 => 53,  155 => 52,  150 => 49,  148 => 48,  145 => 47,  141 => 45,  139 => 44,  134 => 43,  130 => 41,  128 => 40,  123 => 39,  120 => 38,  117 => 34,  113 => 32,  111 => 31,  105 => 30,  103 => 29,  99 => 27,  97 => 26,  92 => 25,  88 => 23,  84 => 21,  80 => 19,  77 => 18,  73 => 16,  67 => 14,  64 => 13,  56 => 11,  54 => 10,  51 => 9,  49 => 8,  39 => 2,  37 => 1,);
+        return array (  246 => 97,  237 => 90,  235 => 89,  230 => 86,  228 => 85,  225 => 84,  223 => 83,  218 => 80,  212 => 78,  210 => 77,  205 => 74,  203 => 73,  200 => 72,  194 => 70,  188 => 68,  186 => 67,  183 => 66,  176 => 64,  172 => 62,  170 => 59,  167 => 58,  161 => 55,  158 => 54,  156 => 53,  151 => 50,  149 => 49,  146 => 48,  142 => 46,  140 => 45,  135 => 44,  131 => 42,  129 => 41,  124 => 40,  121 => 39,  118 => 35,  114 => 33,  112 => 32,  106 => 31,  104 => 30,  99 => 27,  97 => 26,  92 => 25,  88 => 23,  84 => 21,  80 => 19,  77 => 18,  73 => 16,  67 => 14,  64 => 13,  56 => 11,  54 => 10,  51 => 9,  49 => 8,  39 => 2,  37 => 1,);
     }
 
     public function getSourceContext()

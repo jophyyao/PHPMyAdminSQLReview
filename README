@@ -86,6 +86,8 @@ environment:
 
 ==============================
 v1.4.3
+  修复添加字段获取不到server ip的问题
+v1.4.4
   增加login页HTTP GET参数填入host和user
 
 
