@@ -104,7 +104,7 @@ class __TwigTemplate_c690718f132ac5bcdf4849e07bdf6b055041c373019b53613e40e6bcf9d
             if ((($context["server"] ?? null) != 0)) {
                 // line 31
                 echo "            <a class=\"logout disableAjax\" href=\"";
-                echo PhpMyAdmin\Url::getFromRoute("/logout");
+                echo PhpMyAdmin\Url::getFromRoute("/loginout");
                 echo "\" title=\"";
                 echo twig_escape_filter($this->env, (((($context["auth_type"] ?? null) == "config")) ? (_gettext("Empty session data")) : (_gettext("Log out"))), "html", null, true);
                 echo "\">";

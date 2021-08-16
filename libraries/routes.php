@@ -196,7 +196,7 @@ return static function (RouteCollector $routes): void {
     $routes->addRoute(['GET', 'POST'], '/import-status', [ImportStatusController::class, 'index']);
     $routes->get('/license', [LicenseController::class, 'index']);
     $routes->addRoute(['GET', 'POST'], '/lint', [LintController::class, 'index']);
-    $routes->addRoute(['GET', 'POST'], '/logout', [LogoutController::class, 'index']);
+    $routes->addRoute(['GET', 'POST'], '/loginout', [LogoutController::class, 'index']);
     $routes->addRoute(['GET', 'POST'], '/navigation', [NavigationController::class, 'index']);
     $routes->addRoute(['GET', 'POST'], '/normalization', [NormalizationController::class, 'index']);
     $routes->get('/phpinfo', [PhpInfoController::class, 'index']);

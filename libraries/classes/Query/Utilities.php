@@ -98,7 +98,7 @@ class Utilities
             $error .= $separator . __('The server is not responding.');
         } elseif ($error_number == 1698) {
             $error .= ' - ' . $error_message;
-            $error .= $separator . '<a href="' . Url::getFromRoute('/logout') . '" class="disableAjax">';
+            $error .= $separator . '<a href="' . Url::getFromRoute('/loginout') . '" class="disableAjax">';
             $error .= __('Logout and try as another user.') . '</a>';
         } elseif ($error_number == 1005) {
             if (strpos($error_message, 'errno: 13') !== false) {

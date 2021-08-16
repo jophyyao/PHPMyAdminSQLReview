@@ -1,9 +1,10 @@
 功能简介:
-  基于phpmyadmin5.1.1开发，增加表
+  基于phpmyadmin5.1.1开发，增加表,库和服务器的变更记录，变更SQL自动记录到数据库。
+  具体审计内容请查看下面列出的审计内容。
 
 部署方法
 1.建库建表
-  运行sql/sql_history
+  运行sql/sql_history.sql
 
 docker-compose file:
 --------------------------------------
@@ -15,22 +16,26 @@ hostname: phpmyadmin
 ports:
 - 8800:80
 volumes:
-- /Users/yaozhijie/PhpstormProjects/phpmyadmin:/var/www/html
+- /{your_code_path}:/var/www/html
 environment:
-- PMA_HOSTS=172.20.3.27,172.16.32.91
-- PMA_VERBOSES=dev,prod
-- PMA_PORTS=3306,3306
+#- PMA_HOSTS=172.20.3.27,172.16.32.91
+#- PMA_VERBOSES=dev,prod
+#- PMA_PORTS=3306,3306
 - LOG_DB_HOSTS=172.20.3.27
 - LOG_DB_USER=root
-- LOG_DB_PASSWORD=selina
+- LOG_DB_PASSWORD=123456
 - LOG_DB_DATABASE=phpmyadmin_log
 - LOG_DB_PORT=3306
 ---------------------------------
+2.启动
+docker-compose -f swarm.yml up -d
+3.浏览器访问
+http://localhost:8800
 
 
 ====================
-表SQL:
-  审计功能
+审计内容概述：
+====================
 表浏览:
   审计内容:
     1.编辑字段 (copy or edit)
@@ -62,6 +67,8 @@ environment:
   移除原有功能:
     1.关联试图
     2.规范化
+表SQL:
+    审计功能
 表搜索
   审计内容:
     1.查找和替换 (table find replace)
@@ -85,9 +92,15 @@ environment:
     1.创建数据库
 
 ==============================
+v1.4.0
+  使用填入服务器:端口方式登陆, AllowArbitraryServer改为true
 v1.4.3
   修复添加字段获取不到server ip的问题
 v1.4.4
   增加login页HTTP GET参数填入host和user
+v1.4.6
+  对接sso登陆登出
+v1.4.8
+  登陆在线时间提高到2小时并关闭gc_maxlifetime大于1440的告警
 
 

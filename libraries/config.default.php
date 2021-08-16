@@ -72,7 +72,7 @@ $cfg['SuhosinDisableWarning'] = false;
  *
  * @global boolean $cfg['LoginCookieValidityDisableWarning']
  */
-$cfg['LoginCookieValidityDisableWarning'] = false;
+$cfg['LoginCookieValidityDisableWarning'] = true;
 
 /**
  * Disable the default warning about MySQL reserved words in column names
@@ -803,7 +803,7 @@ $cfg['LoginCookieRecall'] = true;
  *
  * @global integer $cfg['LoginCookieValidity']
  */
-$cfg['LoginCookieValidity'] = 86400;
+$cfg['LoginCookieValidity'] = 7200;
 
 /**
  * how long login cookie should be stored (in seconds)
