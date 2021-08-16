@@ -92,11 +92,15 @@ http://localhost:8800
     1.创建数据库
 
 ==============================
+v1.4.0
+  使用填入服务器:端口方式登陆, AllowArbitraryServer改为true
 v1.4.3
   修复添加字段获取不到server ip的问题
 v1.4.4
   增加login页HTTP GET参数填入host和user
 v1.4.6
   对接sso登陆登出
+v1.4.8
+  登陆在线时间提高到2小时并关闭gc_maxlifetime大于1440的告警
 
 
